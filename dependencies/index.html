@@ -1,0 +1,941 @@
+
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+        <link rel="canonical" href="https://nodecg.io/dependencies/">
+      
+      
+        <meta name="author" content="codeoverflow.org">
+      
+      <link rel="shortcut icon" href="https://avatars.githubusercontent.com/codeoverflow-org">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-5.4.0">
+    
+    
+      
+        <title>Dependency Graph - nodecg-io Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.fe0cca5b.min.css">
+      
+        <link rel="stylesheet" href="../assets/stylesheets/palette.a46bcfb3.min.css">
+      
+      
+    
+    
+    
+      
+    
+    
+    
+      <link rel="stylesheet" href="../stylesheets/colors.css">
+    
+      <link rel="stylesheet" href="../stylesheets/fonts.css">
+    
+    
+      
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="" data-md-color-accent="">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#dependency-graph" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid" aria-label="Header">
+    <a href="https://nodecg.io/" title="nodecg-io Documentation" class="md-header-nav__button md-logo" aria-label="nodecg-io Documentation">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header-nav__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header-nav__title" data-md-component="header-title">
+      
+        <div class="md-header-nav__ellipsis">
+          <span class="md-header-nav__topic md-ellipsis">
+            nodecg-io Documentation
+          </span>
+          <span class="md-header-nav__topic md-ellipsis">
+            
+              Dependency Graph
+            
+          </span>
+        </div>
+      
+    </div>
+    
+      <label class="md-header-nav__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active">
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" data-md-component="search-reset" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header-nav__source">
+        
+<a href="https://github.com/codeoverflow-org/nodecg-io/" title="Go to repository" class="md-source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 00-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 01-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 000 40.81l195.61 195.6a28.86 28.86 0 0040.8 0l194.69-194.69a28.86 28.86 0 000-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    codeoverflow-org/nodecg-io
+  </div>
+</a>
+      </div>
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+        
+      
+      
+        
+          
+
+  
+
+<nav class="md-tabs md-tabs--active" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  <li class="md-tabs__item">
+    
+      <a href=".." class="md-tabs__link">
+        Home
+      </a>
+    
+  </li>
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../getting_started/install/" class="md-tabs__link">
+          Getting Started
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../contribute/contribute/" class="md-tabs__link">
+          Contribute
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../services/" class="md-tabs__link md-tabs__link--active">
+          Services
+        </a>
+      
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="https://nodecg.io/" title="nodecg-io Documentation" class="md-nav__button md-logo" aria-label="nodecg-io Documentation">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    nodecg-io Documentation
+  </label>
+  
+    <div class="md-nav__source">
+      
+<a href="https://github.com/codeoverflow-org/nodecg-io/" title="Go to repository" class="md-source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 00-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 01-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 000 40.81l195.61 195.6a28.86 28.86 0 0040.8 0l194.69-194.69a28.86 28.86 0 000-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    codeoverflow-org/nodecg-io
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href=".." title="Home" class="md-nav__link">
+      Home
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2">
+    
+    <label class="md-nav__link" for="nav-2">
+      Getting Started
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59 16.58L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.42z"/></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Getting Started" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+        </span>
+        Getting Started
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../getting_started/install/" title="Installation" class="md-nav__link">
+      Installation
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../getting_started/create_bundle/" title="Your first bundle" class="md-nav__link">
+      Your first bundle
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3">
+    
+    <label class="md-nav__link" for="nav-3">
+      Contribute
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59 16.58L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.42z"/></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Contribute" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+        </span>
+        Contribute
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../contribute/contribute/" title="Basics" class="md-nav__link">
+      Basics
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../contribute/create_service/" title="Create a Service" class="md-nav__link">
+      Create a Service
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../contribute/create_sample/" title="Create a sample bundle" class="md-nav__link">
+      Create a sample bundle
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../contribute/sample_documentation/" title="Document a sample" class="md-nav__link">
+      Document a sample
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../contribute/contributors/" title="Contributors" class="md-nav__link">
+      Contributors
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4" checked>
+    
+    <label class="md-nav__link" for="nav-4">
+      Services
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59 16.58L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.42z"/></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Services" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+        </span>
+        Services
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../services/" title="Available services" class="md-nav__link">
+      Available services
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../samples/ahk/" title="AHK sample" class="md-nav__link">
+      AHK sample
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../samples/discord/" title="Discord sample" class="md-nav__link">
+      Discord sample
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../samples/intellij/" title="IntelliJ sample" class="md-nav__link">
+      IntelliJ sample
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-4-5" type="checkbox" id="nav-4-5">
+    
+    <label class="md-nav__link" for="nav-4-5">
+      Midi
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59 16.58L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.42z"/></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Midi" data-md-level="2">
+      <label class="md-nav__title" for="nav-4-5">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+        </span>
+        Midi
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../samples/midi-input/" title="Midi-Input sample" class="md-nav__link">
+      Midi-Input sample
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../samples/midi-output/" title="Midi-Output sample" class="md-nav__link">
+      Midi-Output sample
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../samples/midi-io/" title="Midi-IO sample" class="md-nav__link">
+      Midi-IO sample
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../samples/rcon/" title="Rcon sample" class="md-nav__link">
+      Rcon sample
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../samples/reddit/" title="Reddit Sample" class="md-nav__link">
+      Reddit Sample
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-4-8" type="checkbox" id="nav-4-8">
+    
+    <label class="md-nav__link" for="nav-4-8">
+      sACN
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59 16.58L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.42z"/></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="sACN" data-md-level="2">
+      <label class="md-nav__title" for="nav-4-8">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+        </span>
+        sACN
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../samples/sacn-receiver/" title="sACN Receiver sample" class="md-nav__link">
+      sACN Receiver sample
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../samples/sacn-sender/" title="sACN Sender sample" class="md-nav__link">
+      sACN Sender sample
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../samples/serial/" title="Serial sample" class="md-nav__link">
+      Serial sample
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../samples/slack/" title="Slack sample" class="md-nav__link">
+      Slack sample
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../samples/spotify/" title="Spotify sample" class="md-nav__link">
+      Spotify sample
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../samples/streamdeck/" title="Streamdeck sample" class="md-nav__link">
+      Streamdeck sample
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../samples/telegram/" title="Telegram sample" class="md-nav__link">
+      Telegram sample
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../samples/tiane/" title="TIANE sample" class="md-nav__link">
+      TIANE sample
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../samples/twitch-chat/" title="Twitch sample" class="md-nav__link">
+      Twitch sample
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../samples/twitter/" title="Twitter sample" class="md-nav__link">
+      Twitter sample
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-4-17" type="checkbox" id="nav-4-17">
+    
+    <label class="md-nav__link" for="nav-4-17">
+      WebSocket
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59 16.58L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.42z"/></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="WebSocket" data-md-level="2">
+      <label class="md-nav__title" for="nav-4-17">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+        </span>
+        WebSocket
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../samples/websocket-client/" title="Client sample" class="md-nav__link">
+      Client sample
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../samples/websocket-server/" title="Server sample" class="md-nav__link">
+      Server sample
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../samples/xdotool/" title="Xdotool sample" class="md-nav__link">
+      Xdotool sample
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../samples/youtube/" title="YouTube sample" class="md-nav__link">
+      YouTube sample
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+    <a href="./" title="Dependency Graph" class="md-nav__link md-nav__link--active">
+      Dependency Graph
+    </a>
+    
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/codeoverflow-org/nodecg-io-docs/edit/master/docs/dependencies.md" title="Edit this page" class="md-content__button md-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
+                  </a>
+                
+                
+                  
+                
+                
+                <!-- This file is auto-generated. Do not change anything here -->
+<h1 id="dependency-graph">Dependency Graph</h1>
+<p><svg xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="3815px" preserveAspectRatio="none" style="" version="1.1" viewBox="0 0 983 3815" width="983px" zoomAndPan="magnify" class="uml" alt="PlantUML dependency graph" title="PlantUML dependency graph"><defs><filter height="300%" id="f1askvma54e97y" width="300%" x="-1" y="-1"><feGaussianBlur result="blurOut" stdDeviation="2.0" /><feColorMatrix in="blurOut" result="blurOut2" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0" /><feOffset dx="4.0" dy="4.0" in="blurOut2" result="blurOut3" /><feBlend in="SourceGraphic" in2="blurOut3" mode="normal" /></filter></defs><g><a href="https://github.com/codeoverflow-org/nodecg-io/tree/master/nodecg-io-core" target="_top" title="https://github.com/codeoverflow-org/nodecg-io/tree/master/nodecg-io-core" xlink:actuate="onRequest" xlink:href="https://github.com/codeoverflow-org/nodecg-io/tree/master/nodecg-io-core" xlink:show="new" xlink:title="https://github.com/codeoverflow-org/nodecg-io/tree/master/nodecg-io-core" xlink:type="simple"><rect fill="#DC143C" filter="url(#f1askvma54e97y)" height="62.5938" style="stroke:#000000;stroke-width:1.5;" width="150" x="315" y="1363" /><rect fill="#DC143C" height="10" style="stroke:#000000;stroke-width:1.5;" width="15" x="445" y="1368" /><rect fill="#DC143C" height="2" style="stroke:#000000;stroke-width:1.5;" width="4" x="443" y="1370" /><rect fill="#DC143C" height="2" style="stroke:#000000;stroke-width:1.5;" width="4" x="443" y="1374" /><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="50" x="360" y="1395.9951">&#171;core&#187;</text><text fill="#FFFFFF" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" text-decoration="underline" textLength="110" x="330" y="1412.292">nodecg-io-core</text></a><a href="https://www.npmjs.com/package/ajv" target="_top" title="https://www.npmjs.com/package/ajv" xlink:actuate="onRequest" xlink:href="https://www.npmjs.com/package/ajv" xlink:show="new" xlink:title="https://www.npmjs.com/package/ajv" xlink:type="simple"><rect fill="#DAA520" filter="url(#f1askvma54e97y)" height="62.5938" style="stroke:#000000;stroke-width:1.5;" width="75" x="873.5" y="1181" /><rect fill="#DAA520" height="10" style="stroke:#000000;stroke-width:1.5;" width="15" x="928.5" y="1186" /><rect fill="#DAA520" height="2" style="stroke:#000000;stroke-width:1.5;" width="4" x="926.5" y="1188" /><rect fill="#DAA520" height="2" style="stroke:#000000;stroke-width:1.5;" width="4" x="926.5" y="1192" /><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="35" x="888.5" y="1213.9951">&#171;lib&#187;</text><text fill="#FFFFFF" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" text-decoration="underline" textLength="20" x="896" y="1230.292">ajv</text></a><a href="https://www.npmjs.com/package/crypto-js" target="_top" title="https://www.npmjs.com/package/crypto-js" xlink:actuate="onRequest" xlink:href="https://www.npmjs.com/package/crypto-js" xlink:show="new" xlink:title="https://www.npmjs.com/package/crypto-js" xlink:type="simple"><rect fill="#DAA520" filter="url(#f1askvma54e97y)" height="62.5938" style="stroke:#000000;stroke-width:1.5;" width="105" x="858.5" y="1279" /><rect fill="#DAA520" height="10" style="stroke:#000000;stroke-width:1.5;" width="15" x="943.5" y="1284" /><rect fill="#DAA520" height="2" style="stroke:#000000;stroke-width:1.5;" width="4" x="941.5" y="1286" /><rect fill="#DAA520" height="2" style="stroke:#000000;stroke-width:1.5;" width="4" x="941.5" y="1290" /><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="35" x="888.5" y="1311.9951">&#171;lib&#187;</text><text fill="#FFFFFF" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" text-decoration="underline" textLength="65" x="873.5" y="1328.292">crypto-js</text></a><a href="https://www.npmjs.com/package/tslib" target="_top" title="https://www.npmjs.com/package/tslib" xlink:actuate="onRequest" xlink:href="https://www.npmjs.com/package/tslib" xlink:show="new" xlink:title="https://www.npmjs.com/package/tslib" xlink:type="simple"><rect fill="#DAA520" filter="url(#f1askvma54e97y)" height="62.5938" style="stroke:#000000;stroke-width:1.5;" width="75" x="873.5" y="1377" /><rect fill="#DAA520" height="10" style="stroke:#000000;stroke-width:1.5;" width="15" x="928.5" y="1382" /><rect fill="#DAA520" height="2" style="stroke:#000000;stroke-width:1.5;" width="4" x="926.5" y="1384" /><rect fill="#DAA520" height="2" style="stroke:#000000;stroke-width:1.5;" width="4" x="926.5" y="1388" /><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="35" x="888.5" y="1409.9951">&#171;lib&#187;</text><text fill="#FFFFFF" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" text-decoration="underline" textLength="32" x="890" y="1426.292">tslib</text></a><a href="https://www.npmjs.com/package/typescript" target="_top" title="https://www.npmjs.com/package/typescript" xlink:actuate="onRequest" xlink:href="https://www.npmjs.com/package/typescript" xlink:show="new" xlink:title="https://www.npmjs.com/package/typescript" xlink:type="simple"><rect fill="#DAA520" filter="url(#f1askvma54e97y)" height="62.5938" style="stroke:#000000;stroke-width:1.5;" width="116" x="853" y="1475" /><rect fill="#DAA520" height="10" style="stroke:#000000;stroke-width:1.5;" width="15" x="949" y="1480" /><rect fill="#DAA520" height="2" style="stroke:#000000;stroke-width:1.5;" width="4" x="947" y="1482" /><rect fill="#DAA520" height="2" style="stroke:#000000;stroke-width:1.5;" width="4" x="947" y="1486" /><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="35" x="888.5" y="1507.9951">&#171;lib&#187;</text><text fill="#FFFFFF" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" text-decoration="underline" textLength="76" x="868" y="1524.292">typescript</text></a><a href="https://github.com/codeoverflow-org/nodecg-io/tree/master/nodecg-io-ahk" target="_top" title="https://github.com/codeoverflow-org/nodecg-io/tree/master/nodecg-io-ahk" xlink:actuate="onRequest" xlink:href="https://github.com/codeoverflow-org/nodecg-io/tree/master/nodecg-io-ahk" xlink:show="new" xlink:title="https://github.com/codeoverflow-org/nodecg-io/tree/master/nodecg-io-ahk" xlink:type="simple"><rect fill="#FF8C00" filter="url(#f1askvma54e97y)" height="62.5938" style="stroke:#000000;stroke-width:1.5;" width="144" x="59" y="171" /><rect fill="#FF8C00" height="10" style="stroke:#000000;stroke-width:1.5;" width="15" x="183" y="176" /><rect fill="#FF8C00" height="2" style="stroke:#000000;stroke-width:1.5;" width="4" x="181" y="178" /><rect fill="#FF8C00" height="2" style="stroke:#000000;stroke-width:1.5;" width="4" x="181" y="182" /><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="69" x="91.5" y="203.9951">&#171;service&#187;</text><text fill="#FFFFFF" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" text-decoration="underline" textLength="104" x="74" y="220.292">nodecg-io-ahk</text></a><a href="https://www.npmjs.com/package/node-fetch" target="_top" title="https://www.npmjs.com/package/node-fetch" xlink:actuate="onRequest" xlink:href="https://www.npmjs.com/package/node-fetch" xlink:show="new" xlink:title="https://www.npmjs.com/package/node-fetch" xlink:type="simple"><rect fill="#DAA520" filter="url(#f1askvma54e97y)" height="62.5938" style="stroke:#000000;stroke-width:1.5;" width="121" x="598.5" y="149" /><rect fill="#DAA520" height="10" style="stroke:#000000;stroke-width:1.5;" width="15" x="699.5" y="154" /><rect fill="#DAA520" height="2" style="stroke:#000000;stroke-width:1.5;" width="4" x="697.5" y="156" /><rect fill="#DAA520" height="2" style="stroke:#000000;stroke-width:1.5;" width="4" x="697.5" y="160" /><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="35" x="636.5" y="181.9951">&#171;lib&#187;</text><text fill="#FFFFFF" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" text-decoration="underline" textLength="81" x="613.5" y="198.292">node-fetch</text></a><a href="https://github.com/codeoverflow-org/nodecg-io/tree/master/nodecg-io-discord" target="_top" title="https://github.com/codeoverflow-org/nodecg-io/tree/master/nodecg-io-discord" xlink:actuate="onRequest" xlink:href="https://github.com/codeoverflow-org/nodecg-io/tree/master/nodecg-io-discord" xlink:show="new" xlink:title="https://github.com/codeoverflow-org/nodecg-io/tree/master/nodecg-io-discord" xlink:type="simple"><rect fill="#FF8C00" filter="url(#f1askvma54e97y)" height="62.5938" style="stroke:#000000;stroke-width:1.5;" width="170" x="46" y="647" /><rect fill="#FF8C00" height="10" style="stroke:#000000;stroke-width:1.5;" width="15" x="196" y="652" /><rect fill="#FF8C00" height="2" style="stroke:#000000;stroke-width:1.5;" width="4" x="194" y="654" /><rect fill="#FF8C00" height="2" style="stroke:#000000;stroke-width:1.5;" width="4" x="194" y="658" /><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="69" x="91.5" y="679.9951">&#171;service&#187;</text><text fill="#FFFFFF" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" text-decoration="underline" textLength="130" x="61" y="696.292">nodecg-io-discord</text></a><a href="https://www.npmjs.com/package/discord.js" target="_top" title="https://www.npmjs.com/package/discord.js" xlink:actuate="onRequest" xlink:href="https://www.npmjs.com/package/discord.js" xlink:show="new" xlink:title="https://www.npmjs.com/package/discord.js" xlink:type="simple"><rect fill="#DAA520" filter="url(#f1askvma54e97y)" height="62.5938" style="stroke:#000000;stroke-width:1.5;" width="108" x="605" y="647" /><rect fill="#DAA520" height="10" style="stroke:#000000;stroke-width:1.5;" width="15" x="693" y="652" /><rect fill="#DAA520" height="2" style="stroke:#000000;stroke-width:1.5;" width="4" x="691" y="654" /><rect fill="#DAA520" height="2" style="stroke:#000000;stroke-width:1.5;" width="4" x="691" y="658" /><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="35" x="636.5" y="679.9951">&#171;lib&#187;</text><text fill="#FFFFFF" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" text-decoration="underline" textLength="68" x="620" y="696.292">discord.js</text></a><a href="https://github.com/codeoverflow-org/nodecg-io/tree/master/nodecg-io-intellij" target="_top" title="https://github.com/codeoverflow-org/nodecg-io/tree/master/nodecg-io-intellij" xlink:actuate="onRequest" xlink:href="https://github.com/codeoverflow-org/nodecg-io/tree/master/nodecg-io-intellij" xlink:show="new" xlink:title="https://github.com/codeoverflow-org/nodecg-io/tree/master/nodecg-io-intellij" xlink:type="simple"><rect fill="#FF8C00" filter="url(#f1askvma54e97y)" height="62.5938" style="stroke:#000000;stroke-width:1.5;" width="163" x="49.5" y="269" /><rect fill="#FF8C00" height="10" style="stroke:#000000;stroke-width:1.5;" width="15" x="192.5" y="274" /><rect fill="#FF8C00" height="2" style="stroke:#000000;stroke-width:1.5;" width="4" x="190.5" y="276" /><rect fill="#FF8C00" height="2" style="stroke:#000000;stroke-width:1.5;" width="4" x="190.5" y="280" /><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="69" x="91.5" y="301.9951">&#171;service&#187;</text><text fill="#FFFFFF" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" text-decoration="underline" textLength="123" x="64.5" y="318.292">nodecg-io-intellij</text></a><a href="https://github.com/codeoverflow-org/nodecg-io/tree/master/nodecg-io-irc" target="_top" title="https://github.com/codeoverflow-org/nodecg-io/tree/master/nodecg-io-irc" xlink:actuate="onRequest" xlink:href="https://github.com/codeoverflow-org/nodecg-io/tree/master/nodecg-io-irc" xlink:show="new" xlink:title="https://github.com/codeoverflow-org/nodecg-io/tree/master/nodecg-io-irc" xlink:type="simple"><rect fill="#FF8C00" filter="url(#f1askvma54e97y)" height="62.5938" style="stroke:#000000;stroke-width:1.5;" width="136" x="63" y="367" /><rect fill="#FF8C00" height="10" style="stroke:#000000;stroke-width:1.5;" width="15" x="179" y="372" /><rect fill="#FF8C00" height="2" style="stroke:#000000;stroke-width:1.5;" width="4" x="177" y="374" /><rect fill="#FF8C00" height="2" style="stroke:#000000;stroke-width:1.5;" width="4" x="177" y="378" /><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="69" x="91.5" y="399.9951">&#171;service&#187;</text><text fill="#FFFFFF" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" text-decoration="underline" textLength="96" x="78" y="416.292">nodecg-io-irc</text></a><a href="https://www.npmjs.com/package/@types/irc" target="_top" title="https://www.npmjs.com/package/@types/irc" xlink:actuate="onRequest" xlink:href="https://www.npmjs.com/package/@types/irc" xlink:show="new" xlink:title="https://www.npmjs.com/package/@types/irc" xlink:type="simple"><rect fill="#DAA520" filter="url(#f1askvma54e97y)" height="62.5938" style="stroke:#000000;stroke-width:1.5;" width="118" x="600" y="255" /><rect fill="#DAA520" height="10" style="stroke:#000000;stroke-width:1.5;" width="15" x="698" y="260" /><rect fill="#DAA520" height="2" style="stroke:#000000;stroke-width:1.5;" width="4" x="696" y="262" /><rect fill="#DAA520" height="2" style="stroke:#000000;stroke-width:1.5;" width="4" x="696" y="266" /><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="35" x="636.5" y="287.9951">&#171;lib&#187;</text><text fill="#FFFFFF" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" text-decoration="underline" textLength="78" x="615" y="304.292">@types/irc</text></a><a href="https://www.npmjs.com/package/irc" target="_top" title="https://www.npmjs.com/package/irc" xlink:actuate="onRequest" xlink:href="https://www.npmjs.com/package/irc" xlink:show="new" xlink:title="https://www.npmjs.com/package/irc" xlink:type="simple"><rect fill="#DAA520" filter="url(#f1askvma54e97y)" height="62.5938" style="stroke:#000000;stroke-width:1.5;" width="75" x="621.5" y="353" /><rect fill="#DAA520" height="10" style="stroke:#000000;stroke-width:1.5;" width="15" x="676.5" y="358" /><rect fill="#DAA520" height="2" style="stroke:#000000;stroke-width:1.5;" width="4" x="674.5" y="360" /><rect fill="#DAA520" height="2" style="stroke:#000000;stroke-width:1.5;" width="4" x="674.5" y="364" /><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="35" x="636.5" y="385.9951">&#171;lib&#187;</text><text fill="#FFFFFF" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" text-decoration="underline" textLength="18" x="645" y="402.292">irc</text></a><a href="https://github.com/codeoverflow-org/nodecg-io/tree/master/nodecg-io-midi-input" target="_top" title="https://github.com/codeoverflow-org/nodecg-io/tree/master/nodecg-io-midi-input" xlink:actuate="onRequest" xlink:href="https://github.com/codeoverflow-org/nodecg-io/tree/master/nodecg-io-midi-input" xlink:show="new" xlink:title="https://github.com/codeoverflow-org/nodecg-io/tree/master/nodecg-io-midi-input" xlink:type="simple"><rect fill="#FF8C00" filter="url(#f1askvma54e97y)" height="62.5938" style="stroke:#000000;stroke-width:1.5;" width="193" x="34.5" y="745" /><rect fill="#FF8C00" height="10" style="stroke:#000000;stroke-width:1.5;" width="15" x="207.5" y="750" /><rect fill="#FF8C00" height="2" style="stroke:#000000;stroke-width:1.5;" width="4" x="205.5" y="752" /><rect fill="#FF8C00" height="2" style="stroke:#000000;stroke-width:1.5;" width="4" x="205.5" y="756" /><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="69" x="91.5" y="777.9951">&#171;service&#187;</text><text fill="#FFFFFF" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" text-decoration="underline" textLength="153" x="49.5" y="794.292">nodecg-io-midi-input</text></a><a href="https://www.npmjs.com/package/easymidi" target="_top" title="https://www.npmjs.com/package/easymidi" xlink:actuate="onRequest" xlink:href="https://www.npmjs.com/package/easymidi" xlink:show="new" xlink:title="https://www.npmjs.com/package/easymidi" xlink:type="simple"><rect fill="#DAA520" filter="url(#f1askvma54e97y)" height="62.5938" style="stroke:#000000;stroke-width:1.5;" width="103" x="607.5" y="745" /><rect fill="#DAA520" height="10" style="stroke:#000000;stroke-width:1.5;" width="15" x="690.5" y="750" /><rect fill="#DAA520" height="2" style="stroke:#000000;stroke-width:1.5;" width="4" x="688.5" y="752" /><rect fill="#DAA520" height="2" style="stroke:#000000;stroke-width:1.5;" width="4" x="688.5" y="756" /><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="35" x="636.5" y="777.9951">&#171;lib&#187;</text><text fill="#FFFFFF" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" text-decoration="underline" textLength="63" x="622.5" y="794.292">easymidi</text></a><a href="https://github.com/codeoverflow-org/nodecg-io/tree/master/nodecg-io-midi-output" target="_top" title="https://github.com/codeoverflow-org/nodecg-io/tree/master/nodecg-io-midi-output" xlink:actuate="onRequest" xlink:href="https://github.com/codeoverflow-org/nodecg-io/tree/master/nodecg-io-midi-output" xlink:show="new" xlink:title="https://github.com/codeoverflow-org/nodecg-io/tree/master/nodecg-io-midi-output" xlink:type="simple"><rect fill="#FF8C00" filter="url(#f1askvma54e97y)" height="62.5938" style="stroke:#000000;stroke-width:1.5;" width="204" x="29" y="843" /><rect fill="#FF8C00" height="10" style="stroke:#000000;stroke-width:1.5;" width="15" x="213" y="848" /><rect fill="#FF8C00" height="2" style="stroke:#000000;stroke-width:1.5;" width="4" x="211" y="850" /><rect fill="#FF8C00" height="2" style="stroke:#000000;stroke-width:1.5;" width="4" x="211" y="854" /><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="69" x="91.5" y="875.9951">&#171;service&#187;</text><text fill="#FFFFFF" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" text-decoration="underline" textLength="164" x="44" y="892.292">nodecg-io-midi-output</text></a><a href="https://github.com/codeoverflow-org/nodecg-io/tree/master/nodecg-io-obs" target="_top" title="https://github.com/codeoverflow-org/nodecg-io/tree/master/nodecg-io-obs" xlink:actuate="onRequest" xlink:href="https://github.com/codeoverflow-org/nodecg-io/tree/master/nodecg-io-obs" xlink:show="new" xlink:title="https://github.com/codeoverflow-org/nodecg-io/tree/master/nodecg-io-obs" xlink:type="simple"><rect fill="#FF8C00" filter="url(#f1askvma54e97y)" height="62.5938" style="stroke:#000000;stroke-width:1.5;" width="144" x="59" y="942" /><rect fill="#FF8C00" height="10" style="stroke:#000000;stroke-width:1.5;" width="15" x="183" y="947" /><rect fill="#FF8C00" height="2" style="stroke:#000000;stroke-width:1.5;" width="4" x="181" y="949" /><rect fill="#FF8C00" height="2" style="stroke:#000000;stroke-width:1.5;" width="4" x="181" y="953" /><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="69" x="91.5" y="974.9951">&#171;service&#187;</text><text fill="#FFFFFF" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" text-decoration="underline" textLength="104" x="74" y="991.292">nodecg-io-obs</text></a><a href="https://www.npmjs.com/package/obs-websocket-js" target="_top" title="https://www.npmjs.com/package/obs-websocket-js" xlink:actuate="onRequest" xlink:href="https://www.npmjs.com/package/obs-websocket-js" xlink:show="new" xlink:title="https://www.npmjs.com/package/obs-websocket-js" xlink:type="simple"><rect fill="#DAA520" filter="url(#f1askvma54e97y)" height="62.5938" style="stroke:#000000;stroke-width:1.5;" width="168" x="575" y="843" /><rect fill="#DAA520" height="10" style="stroke:#000000;stroke-width:1.5;" width="15" x="723" y="848" /><rect fill="#DAA520" height="2" style="stroke:#000000;stroke-width:1.5;" width="4" x="721" y="850" /><rect fill="#DAA520" height="2" style="stroke:#000000;stroke-width:1.5;" width="4" x="721" y="854" /><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="35" x="636.5" y="875.9951">&#171;lib&#187;</text><text fill="#FFFFFF" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" text-decoration="underline" textLength="128" x="590" y="892.292">obs-websocket-js</text></a><a href="https://github.com/codeoverflow-org/nodecg-io/tree/master/nodecg-io-philipshue" target="_top" title="https://github.com/codeoverflow-org/nodecg-io/tree/master/nodecg-io-philipshue" xlink:actuate="onRequest" xlink:href="https://github.com/codeoverflow-org/nodecg-io/tree/master/nodecg-io-philipshue" xlink:show="new" xlink:title="https://github.com/codeoverflow-org/nodecg-io/tree/master/nodecg-io-philipshue" xlink:type="simple"><rect fill="#FF8C00" filter="url(#f1askvma54e97y)" height="62.5938" style="stroke:#000000;stroke-width:1.5;" width="192" x="35" y="549" /><rect fill="#FF8C00" height="10" style="stroke:#000000;stroke-width:1.5;" width="15" x="207" y="554" /><rect fill="#FF8C00" height="2" style="stroke:#000000;stroke-width:1.5;" width="4" x="205" y="556" /><rect fill="#FF8C00" height="2" style="stroke:#000000;stroke-width:1.5;" width="4" x="205" y="560" /><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="69" x="91.5" y="581.9951">&#171;service&#187;</text><text fill="#FFFFFF" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" text-decoration="underline" textLength="152" x="50" y="598.292">nodecg-io-philipshue</text></a><a href="https://www.npmjs.com/package/is-ip" target="_top" title="https://www.npmjs.com/package/is-ip" xlink:actuate="onRequest" xlink:href="https://www.npmjs.com/package/is-ip" xlink:show="new" xlink:title="https://www.npmjs.com/package/is-ip" xlink:type="simple"><rect fill="#DAA520" filter="url(#f1askvma54e97y)" height="62.5938" style="stroke:#000000;stroke-width:1.5;" width="75" x="621.5" y="451" /><rect fill="#DAA520" height="10" style="stroke:#000000;stroke-width:1.5;" width="15" x="676.5" y="456" /><rect fill="#DAA520" height="2" style="stroke:#000000;stroke-width:1.5;" width="4" x="674.5" y="458" /><rect fill="#DAA520" height="2" style="stroke:#000000;stroke-width:1.5;" width="4" x="674.5" y="462" /><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="35" x="636.5" y="483.9951">&#171;lib&#187;</text><text fill="#FFFFFF" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" text-decoration="underline" textLength="31" x="638.5" y="500.292">is-ip</text></a><a href="https://www.npmjs.com/package/node-hue-api" target="_top" title="https://www.npmjs.com/package/node-hue-api" xlink:actuate="onRequest" xlink:href="https://www.npmjs.com/package/node-hue-api" xlink:show="new" xlink:title="https://www.npmjs.com/package/node-hue-api" xlink:type="simple"><rect fill="#DAA520" filter="url(#f1askvma54e97y)" height="62.5938" style="stroke:#000000;stroke-width:1.5;" width="136" x="591" y="549" /><rect fill="#DAA520" height="10" style="stroke:#000000;stroke-width:1.5;" width="15" x="707" y="554" /><rect fill="#DAA520" height="2" style="stroke:#000000;stroke-width:1.5;" width="4" x="705" y="556" /><rect fill="#DAA520" height="2" style="stroke:#000000;stroke-width:1.5;" width="4" x="705" y="560" /><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="35" x="636.5" y="581.9951">&#171;lib&#187;</text><text fill="#FFFFFF" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" text-decoration="underline" textLength="96" x="606" y="598.292">node-hue-api</text></a><a href="https://github.com/codeoverflow-org/nodecg-io/tree/master/nodecg-io-rcon" target="_top" title="https://github.com/codeoverflow-org/nodecg-io/tree/master/nodecg-io-rcon" xlink:actuate="onRequest" xlink:href="https://github.com/codeoverflow-org/nodecg-io/tree/master/nodecg-io-rcon" xlink:show="new" xlink:title="https://github.com/codeoverflow-org/nodecg-io/tree/master/nodecg-io-rcon" xlink:type="simple"><rect fill="#FF8C00" filter="url(#f1askvma54e97y)" height="62.5938" style="stroke:#000000;stroke-width:1.5;" width="150" x="56" y="1042" /><rect fill="#FF8C00" height="10" style="stroke:#000000;stroke-width:1.5;" width="15" x="186" y="1047" /><rect fill="#FF8C00" height="2" style="stroke:#000000;stroke-width:1.5;" width="4" x="184" y="1049" /><rect fill="#FF8C00" height="2" style="stroke:#000000;stroke-width:1.5;" width="4" x="184" y="1053" /><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="69" x="91.5" y="1074.9951">&#171;service&#187;</text><text fill="#FFFFFF" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" text-decoration="underline" textLength="110" x="71" y="1091.292">nodecg-io-rcon</text></a><a href="https://www.npmjs.com/package/rcon-client" target="_top" title="https://www.npmjs.com/package/rcon-client" xlink:actuate="onRequest" xlink:href="https://www.npmjs.com/package/rcon-client" xlink:show="new" xlink:title="https://www.npmjs.com/package/rcon-client" xlink:type="simple"><rect fill="#DAA520" filter="url(#f1askvma54e97y)" height="62.5938" style="stroke:#000000;stroke-width:1.5;" width="119" x="599.5" y="941" /><rect fill="#DAA520" height="10" style="stroke:#000000;stroke-width:1.5;" width="15" x="698.5" y="946" /><rect fill="#DAA520" height="2" style="stroke:#000000;stroke-width:1.5;" width="4" x="696.5" y="948" /><rect fill="#DAA520" height="2" style="stroke:#000000;stroke-width:1.5;" width="4" x="696.5" y="952" /><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="35" x="636.5" y="973.9951">&#171;lib&#187;</text><text fill="#FFFFFF" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" text-decoration="underline" textLength="79" x="614.5" y="990.292">rcon-client</text></a><a href="https://github.com/codeoverflow-org/nodecg-io/tree/master/nodecg-io-reddit" target="_top" title="https://github.com/codeoverflow-org/nodecg-io/tree/master/nodecg-io-reddit" xlink:actuate="onRequest" xlink:href="https://github.com/codeoverflow-org/nodecg-io/tree/master/nodecg-io-reddit" xlink:show="new" xlink:title="https://github.com/codeoverflow-org/nodecg-io/tree/master/nodecg-io-reddit" xlink:type="simple"><rect fill="#FF8C00" filter="url(#f1askvma54e97y)" height="62.5938" style="stroke:#000000;stroke-width:1.5;" width="162" x="50" y="1144" /><rect fill="#FF8C00" height="10" style="stroke:#000000;stroke-width:1.5;" width="15" x="192" y="1149" /><rect fill="#FF8C00" height="2" style="stroke:#000000;stroke-width:1.5;" width="4" x="190" y="1151" /><rect fill="#FF8C00" height="2" style="stroke:#000000;stroke-width:1.5;" width="4" x="190" y="1155" /><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="69" x="91.5" y="1176.9951">&#171;service&#187;</text><text fill="#FFFFFF" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" text-decoration="underline" textLength="122" x="65" y="1193.292">nodecg-io-reddit</text></a><a href="https://www.npmjs.com/package/reddit-ts" target="_top" title="https://www.npmjs.com/package/reddit-ts" xlink:actuate="onRequest" xlink:href="https://www.npmjs.com/package/reddit-ts" xlink:show="new" xlink:title="https://www.npmjs.com/package/reddit-ts" xlink:type="simple"><rect fill="#DAA520" filter="url(#f1askvma54e97y)" height="62.5938" style="stroke:#000000;stroke-width:1.5;" width="104" x="607" y="1039" /><rect fill="#DAA520" height="10" style="stroke:#000000;stroke-width:1.5;" width="15" x="691" y="1044" /><rect fill="#DAA520" height="2" style="stroke:#000000;stroke-width:1.5;" width="4" x="689" y="1046" /><rect fill="#DAA520" height="2" style="stroke:#000000;stroke-width:1.5;" width="4" x="689" y="1050" /><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="35" x="636.5" y="1071.9951">&#171;lib&#187;</text><text fill="#FFFFFF" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" text-decoration="underline" textLength="64" x="622" y="1088.292">reddit-ts</text></a><a href="https://github.com/codeoverflow-org/nodecg-io/tree/master/nodecg-io-sacn-receiver" target="_top" title="https://github.com/codeoverflow-org/nodecg-io/tree/master/nodecg-io-sacn-receiver" xlink:actuate="onRequest" xlink:href="https://github.com/codeoverflow-org/nodecg-io/tree/master/nodecg-io-sacn-receiver" xlink:show="new" xlink:title="https://github.com/codeoverflow-org/nodecg-io/tree/master/nodecg-io-sacn-receiver" xlink:type="simple"><rect fill="#FF8C00" filter="url(#f1askvma54e97y)" height="62.5938" style="stroke:#000000;stroke-width:1.5;" width="215" x="23.5" y="1250" /><rect fill="#FF8C00" height="10" style="stroke:#000000;stroke-width:1.5;" width="15" x="218.5" y="1255" /><rect fill="#FF8C00" height="2" style="stroke:#000000;stroke-width:1.5;" width="4" x="216.5" y="1257" /><rect fill="#FF8C00" height="2" style="stroke:#000000;stroke-width:1.5;" width="4" x="216.5" y="1261" /><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="69" x="91.5" y="1282.9951">&#171;service&#187;</text><text fill="#FFFFFF" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" text-decoration="underline" textLength="175" x="38.5" y="1299.292">nodecg-io-sacn-receiver</text></a><a href="https://www.npmjs.com/package/sacn" target="_top" title="https://www.npmjs.com/package/sacn" xlink:actuate="onRequest" xlink:href="https://www.npmjs.com/package/sacn" xlink:show="new" xlink:title="https://www.npmjs.com/package/sacn" xlink:type="simple"><rect fill="#DAA520" filter="url(#f1askvma54e97y)" height="62.5938" style="stroke:#000000;stroke-width:1.5;" width="75" x="621.5" y="1137" /><rect fill="#DAA520" height="10" style="stroke:#000000;stroke-width:1.5;" width="15" x="676.5" y="1142" /><rect fill="#DAA520" height="2" style="stroke:#000000;stroke-width:1.5;" width="4" x="674.5" y="1144" /><rect fill="#DAA520" height="2" style="stroke:#000000;stroke-width:1.5;" width="4" x="674.5" y="1148" /><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="35" x="636.5" y="1169.9951">&#171;lib&#187;</text><text fill="#FFFFFF" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" text-decoration="underline" textLength="32" x="638" y="1186.292">sacn</text></a><a href="https://github.com/codeoverflow-org/nodecg-io/tree/master/nodecg-io-sacn-sender" target="_top" title="https://github.com/codeoverflow-org/nodecg-io/tree/master/nodecg-io-sacn-sender" xlink:actuate="onRequest" xlink:href="https://github.com/codeoverflow-org/nodecg-io/tree/master/nodecg-io-sacn-sender" xlink:show="new" xlink:title="https://github.com/codeoverflow-org/nodecg-io/tree/master/nodecg-io-sacn-sender" xlink:type="simple"><rect fill="#FF8C00" filter="url(#f1askvma54e97y)" height="62.5938" style="stroke:#000000;stroke-width:1.5;" width="205" x="28.5" y="1363" /><rect fill="#FF8C00" height="10" style="stroke:#000000;stroke-width:1.5;" width="15" x="213.5" y="1368" /><rect fill="#FF8C00" height="2" style="stroke:#000000;stroke-width:1.5;" width="4" x="211.5" y="1370" /><rect fill="#FF8C00" height="2" style="stroke:#000000;stroke-width:1.5;" width="4" x="211.5" y="1374" /><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="69" x="91.5" y="1395.9951">&#171;service&#187;</text><text fill="#FFFFFF" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" text-decoration="underline" textLength="165" x="43.5" y="1412.292">nodecg-io-sacn-sender</text></a><a href="https://github.com/codeoverflow-org/nodecg-io/tree/master/nodecg-io-serial" target="_top" title="https://github.com/codeoverflow-org/nodecg-io/tree/master/nodecg-io-serial" xlink:actuate="onRequest" xlink:href="https://github.com/codeoverflow-org/nodecg-io/tree/master/nodecg-io-serial" xlink:show="new" xlink:title="https://github.com/codeoverflow-org/nodecg-io/tree/master/nodecg-io-serial" xlink:type="simple"><rect fill="#FF8C00" filter="url(#f1askvma54e97y)" height="62.5938" style="stroke:#000000;stroke-width:1.5;" width="156" x="53" y="1569" /><rect fill="#FF8C00" height="10" style="stroke:#000000;stroke-width:1.5;" width="15" x="189" y="1574" /><rect fill="#FF8C00" height="2" style="stroke:#000000;stroke-width:1.5;" width="4" x="187" y="1576" /><rect fill="#FF8C00" height="2" style="stroke:#000000;stroke-width:1.5;" width="4" x="187" y="1580" /><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="69" x="91.5" y="1601.9951">&#171;service&#187;</text><text fill="#FFFFFF" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" text-decoration="underline" textLength="116" x="68" y="1618.292">nodecg-io-serial</text></a><a href="https://www.npmjs.com/package/@types/serialport" target="_top" title="https://www.npmjs.com/package/@types/serialport" xlink:actuate="onRequest" xlink:href="https://www.npmjs.com/package/@types/serialport" xlink:show="new" xlink:title="https://www.npmjs.com/package/@types/serialport" xlink:type="simple"><rect fill="#DAA520" filter="url(#f1askvma54e97y)" height="62.5938" style="stroke:#000000;stroke-width:1.5;" width="170" x="574" y="1520" /><rect fill="#DAA520" height="10" style="stroke:#000000;stroke-width:1.5;" width="15" x="724" y="1525" /><rect fill="#DAA520" height="2" style="stroke:#000000;stroke-width:1.5;" width="4" x="722" y="1527" /><rect fill="#DAA520" height="2" style="stroke:#000000;stroke-width:1.5;" width="4" x="722" y="1531" /><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="35" x="636.5" y="1552.9951">&#171;lib&#187;</text><text fill="#FFFFFF" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" text-decoration="underline" textLength="130" x="589" y="1569.292">@types/serialport</text></a><a href="https://www.npmjs.com/package/@serialport/parser-readline" target="_top" title="https://www.npmjs.com/package/@serialport/parser-readline" xlink:actuate="onRequest" xlink:href="https://www.npmjs.com/package/@serialport/parser-readline" xlink:show="new" xlink:title="https://www.npmjs.com/package/@serialport/parser-readline" xlink:type="simple"><rect fill="#DAA520" filter="url(#f1askvma54e97y)" height="62.5938" style="stroke:#000000;stroke-width:1.5;" width="239" x="539.5" y="1618" /><rect fill="#DAA520" height="10" style="stroke:#000000;stroke-width:1.5;" width="15" x="758.5" y="1623" /><rect fill="#DAA520" height="2" style="stroke:#000000;stroke-width:1.5;" width="4" x="756.5" y="1625" /><rect fill="#DAA520" height="2" style="stroke:#000000;stroke-width:1.5;" width="4" x="756.5" y="1629" /><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="35" x="636.5" y="1650.9951">&#171;lib&#187;</text><text fill="#FFFFFF" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" text-decoration="underline" textLength="199" x="554.5" y="1667.292">@serialport/parser-readline</text></a><a href="https://www.npmjs.com/package/serialport" target="_top" title="https://www.npmjs.com/package/serialport" xlink:actuate="onRequest" xlink:href="https://www.npmjs.com/package/serialport" xlink:show="new" xlink:title="https://www.npmjs.com/package/serialport" xlink:type="simple"><rect fill="#DAA520" filter="url(#f1askvma54e97y)" height="62.5938" style="stroke:#000000;stroke-width:1.5;" width="110" x="604" y="1716" /><rect fill="#DAA520" height="10" style="stroke:#000000;stroke-width:1.5;" width="15" x="694" y="1721" /><rect fill="#DAA520" height="2" style="stroke:#000000;stroke-width:1.5;" width="4" x="692" y="1723" /><rect fill="#DAA520" height="2" style="stroke:#000000;stroke-width:1.5;" width="4" x="692" y="1727" /><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="35" x="636.5" y="1748.9951">&#171;lib&#187;</text><text fill="#FFFFFF" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" text-decoration="underline" textLength="70" x="619" y="1765.292">serialport</text></a><a href="https://github.com/codeoverflow-org/nodecg-io/tree/master/nodecg-io-slack" target="_top" title="https://github.com/codeoverflow-org/nodecg-io/tree/master/nodecg-io-slack" xlink:actuate="onRequest" xlink:href="https://github.com/codeoverflow-org/nodecg-io/tree/master/nodecg-io-slack" xlink:show="new" xlink:title="https://github.com/codeoverflow-org/nodecg-io/tree/master/nodecg-io-slack" xlink:type="simple"><rect fill="#FF8C00" filter="url(#f1askvma54e97y)" height="62.5938" style="stroke:#000000;stroke-width:1.5;" width="154" x="54" y="1741" /><rect fill="#FF8C00" height="10" style="stroke:#000000;stroke-width:1.5;" width="15" x="188" y="1746" /><rect fill="#FF8C00" height="2" style="stroke:#000000;stroke-width:1.5;" width="4" x="186" y="1748" /><rect fill="#FF8C00" height="2" style="stroke:#000000;stroke-width:1.5;" width="4" x="186" y="1752" /><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="69" x="91.5" y="1773.9951">&#171;service&#187;</text><text fill="#FFFFFF" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" text-decoration="underline" textLength="114" x="69" y="1790.292">nodecg-io-slack</text></a><a href="https://www.npmjs.com/package/@slack/web-api" target="_top" title="https://www.npmjs.com/package/@slack/web-api" xlink:actuate="onRequest" xlink:href="https://www.npmjs.com/package/@slack/web-api" xlink:show="new" xlink:title="https://www.npmjs.com/package/@slack/web-api" xlink:type="simple"><rect fill="#DAA520" filter="url(#f1askvma54e97y)" height="62.5938" style="stroke:#000000;stroke-width:1.5;" width="153" x="582.5" y="1814" /><rect fill="#DAA520" height="10" style="stroke:#000000;stroke-width:1.5;" width="15" x="715.5" y="1819" /><rect fill="#DAA520" height="2" style="stroke:#000000;stroke-width:1.5;" width="4" x="713.5" y="1821" /><rect fill="#DAA520" height="2" style="stroke:#000000;stroke-width:1.5;" width="4" x="713.5" y="1825" /><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="35" x="636.5" y="1846.9951">&#171;lib&#187;</text><text fill="#FFFFFF" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" text-decoration="underline" textLength="113" x="597.5" y="1863.292">@slack/web-api</text></a><a href="https://github.com/codeoverflow-org/nodecg-io/tree/master/nodecg-io-spotify" target="_top" title="https://github.com/codeoverflow-org/nodecg-io/tree/master/nodecg-io-spotify" xlink:actuate="onRequest" xlink:href="https://github.com/codeoverflow-org/nodecg-io/tree/master/nodecg-io-spotify" xlink:show="new" xlink:title="https://github.com/codeoverflow-org/nodecg-io/tree/master/nodecg-io-spotify" xlink:type="simple"><rect fill="#FF8C00" filter="url(#f1askvma54e97y)" height="62.5938" style="stroke:#000000;stroke-width:1.5;" width="169" x="46.5" y="1976" /><rect fill="#FF8C00" height="10" style="stroke:#000000;stroke-width:1.5;" width="15" x="195.5" y="1981" /><rect fill="#FF8C00" height="2" style="stroke:#000000;stroke-width:1.5;" width="4" x="193.5" y="1983" /><rect fill="#FF8C00" height="2" style="stroke:#000000;stroke-width:1.5;" width="4" x="193.5" y="1987" /><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="69" x="91.5" y="2008.9951">&#171;service&#187;</text><text fill="#FFFFFF" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" text-decoration="underline" textLength="129" x="61.5" y="2025.292">nodecg-io-spotify</text></a><a href="https://www.npmjs.com/package/@types/spotify-web-api-node" target="_top" title="https://www.npmjs.com/package/@types/spotify-web-api-node" xlink:actuate="onRequest" xlink:href="https://www.npmjs.com/package/@types/spotify-web-api-node" xlink:show="new" xlink:title="https://www.npmjs.com/package/@types/spotify-web-api-node" xlink:type="simple"><rect fill="#DAA520" filter="url(#f1askvma54e97y)" height="62.5938" style="stroke:#000000;stroke-width:1.5;" width="257" x="530.5" y="2010" /><rect fill="#DAA520" height="10" style="stroke:#000000;stroke-width:1.5;" width="15" x="767.5" y="2015" /><rect fill="#DAA520" height="2" style="stroke:#000000;stroke-width:1.5;" width="4" x="765.5" y="2017" /><rect fill="#DAA520" height="2" style="stroke:#000000;stroke-width:1.5;" width="4" x="765.5" y="2021" /><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="35" x="636.5" y="2042.9951">&#171;lib&#187;</text><text fill="#FFFFFF" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" text-decoration="underline" textLength="217" x="545.5" y="2059.292">@types/spotify-web-api-node</text></a><a href="https://www.npmjs.com/package/express" target="_top" title="https://www.npmjs.com/package/express" xlink:actuate="onRequest" xlink:href="https://www.npmjs.com/package/express" xlink:show="new" xlink:title="https://www.npmjs.com/package/express" xlink:type="simple"><rect fill="#DAA520" filter="url(#f1askvma54e97y)" height="62.5938" style="stroke:#000000;stroke-width:1.5;" width="96" x="611" y="2206" /><rect fill="#DAA520" height="10" style="stroke:#000000;stroke-width:1.5;" width="15" x="687" y="2211" /><rect fill="#DAA520" height="2" style="stroke:#000000;stroke-width:1.5;" width="4" x="685" y="2213" /><rect fill="#DAA520" height="2" style="stroke:#000000;stroke-width:1.5;" width="4" x="685" y="2217" /><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="35" x="636.5" y="2238.9951">&#171;lib&#187;</text><text fill="#FFFFFF" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" text-decoration="underline" textLength="56" x="626" y="2255.292">express</text></a><a href="https://www.npmjs.com/package/open" target="_top" title="https://www.npmjs.com/package/open" xlink:actuate="onRequest" xlink:href="https://www.npmjs.com/package/open" xlink:show="new" xlink:title="https://www.npmjs.com/package/open" xlink:type="simple"><rect fill="#DAA520" filter="url(#f1askvma54e97y)" height="62.5938" style="stroke:#000000;stroke-width:1.5;" width="77" x="620.5" y="2108" /><rect fill="#DAA520" height="10" style="stroke:#000000;stroke-width:1.5;" width="15" x="677.5" y="2113" /><rect fill="#DAA520" height="2" style="stroke:#000000;stroke-width:1.5;" width="4" x="675.5" y="2115" /><rect fill="#DAA520" height="2" style="stroke:#000000;stroke-width:1.5;" width="4" x="675.5" y="2119" /><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="35" x="636.5" y="2140.9951">&#171;lib&#187;</text><text fill="#FFFFFF" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" text-decoration="underline" textLength="37" x="635.5" y="2157.292">open</text></a><a href="https://www.npmjs.com/package/spotify-web-api-node" target="_top" title="https://www.npmjs.com/package/spotify-web-api-node" xlink:actuate="onRequest" xlink:href="https://www.npmjs.com/package/spotify-web-api-node" xlink:show="new" xlink:title="https://www.npmjs.com/package/spotify-web-api-node" xlink:type="simple"><rect fill="#DAA520" filter="url(#f1askvma54e97y)" height="62.5938" style="stroke:#000000;stroke-width:1.5;" width="197" x="560.5" y="1912" /><rect fill="#DAA520" height="10" style="stroke:#000000;stroke-width:1.5;" width="15" x="737.5" y="1917" /><rect fill="#DAA520" height="2" style="stroke:#000000;stroke-width:1.5;" width="4" x="735.5" y="1919" /><rect fill="#DAA520" height="2" style="stroke:#000000;stroke-width:1.5;" width="4" x="735.5" y="1923" /><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="35" x="636.5" y="1944.9951">&#171;lib&#187;</text><text fill="#FFFFFF" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" text-decoration="underline" textLength="157" x="575.5" y="1961.292">spotify-web-api-node</text></a><a href="https://github.com/codeoverflow-org/nodecg-io/tree/master/nodecg-io-streamdeck" target="_top" title="https://github.com/codeoverflow-org/nodecg-io/tree/master/nodecg-io-streamdeck" xlink:actuate="onRequest" xlink:href="https://github.com/codeoverflow-org/nodecg-io/tree/master/nodecg-io-streamdeck" xlink:show="new" xlink:title="https://github.com/codeoverflow-org/nodecg-io/tree/master/nodecg-io-streamdeck" xlink:type="simple"><rect fill="#FF8C00" filter="url(#f1askvma54e97y)" height="62.5938" style="stroke:#000000;stroke-width:1.5;" width="204" x="29" y="2429" /><rect fill="#FF8C00" height="10" style="stroke:#000000;stroke-width:1.5;" width="15" x="213" y="2434" /><rect fill="#FF8C00" height="2" style="stroke:#000000;stroke-width:1.5;" width="4" x="211" y="2436" /><rect fill="#FF8C00" height="2" style="stroke:#000000;stroke-width:1.5;" width="4" x="211" y="2440" /><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="69" x="91.5" y="2461.9951">&#171;service&#187;</text><text fill="#FFFFFF" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" text-decoration="underline" textLength="164" x="44" y="2478.292">nodecg-io-streamdeck</text></a><a href="https://www.npmjs.com/package/elgato-stream-deck" target="_top" title="https://www.npmjs.com/package/elgato-stream-deck" xlink:actuate="onRequest" xlink:href="https://www.npmjs.com/package/elgato-stream-deck" xlink:show="new" xlink:title="https://www.npmjs.com/package/elgato-stream-deck" xlink:type="simple"><rect fill="#DAA520" filter="url(#f1askvma54e97y)" height="62.5938" style="stroke:#000000;stroke-width:1.5;" width="184" x="567" y="2500" /><rect fill="#DAA520" height="10" style="stroke:#000000;stroke-width:1.5;" width="15" x="731" y="2505" /><rect fill="#DAA520" height="2" style="stroke:#000000;stroke-width:1.5;" width="4" x="729" y="2507" /><rect fill="#DAA520" height="2" style="stroke:#000000;stroke-width:1.5;" width="4" x="729" y="2511" /><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="35" x="636.5" y="2532.9951">&#171;lib&#187;</text><text fill="#FFFFFF" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" text-decoration="underline" textLength="144" x="582" y="2549.292">elgato-stream-deck</text></a><a href="https://github.com/codeoverflow-org/nodecg-io/tree/master/nodecg-io-streamelements" target="_top" title="https://github.com/codeoverflow-org/nodecg-io/tree/master/nodecg-io-streamelements" xlink:actuate="onRequest" xlink:href="https://github.com/codeoverflow-org/nodecg-io/tree/master/nodecg-io-streamelements" xlink:show="new" xlink:title="https://github.com/codeoverflow-org/nodecg-io/tree/master/nodecg-io-streamelements" xlink:type="simple"><rect fill="#FF8C00" filter="url(#f1askvma54e97y)" height="62.5938" style="stroke:#000000;stroke-width:1.5;" width="237" x="12.5" y="2598" /><rect fill="#FF8C00" height="10" style="stroke:#000000;stroke-width:1.5;" width="15" x="229.5" y="2603" /><rect fill="#FF8C00" height="2" style="stroke:#000000;stroke-width:1.5;" width="4" x="227.5" y="2605" /><rect fill="#FF8C00" height="2" style="stroke:#000000;stroke-width:1.5;" width="4" x="227.5" y="2609" /><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="69" x="91.5" y="2630.9951">&#171;service&#187;</text><text fill="#FFFFFF" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" text-decoration="underline" textLength="197" x="27.5" y="2647.292">nodecg-io-streamelements</text></a><a href="https://www.npmjs.com/package/@types/socket.io-client" target="_top" title="https://www.npmjs.com/package/@types/socket.io-client" xlink:actuate="onRequest" xlink:href="https://www.npmjs.com/package/@types/socket.io-client" xlink:show="new" xlink:title="https://www.npmjs.com/package/@types/socket.io-client" xlink:type="simple"><rect fill="#DAA520" filter="url(#f1askvma54e97y)" height="62.5938" style="stroke:#000000;stroke-width:1.5;" width="214" x="552" y="2696" /><rect fill="#DAA520" height="10" style="stroke:#000000;stroke-width:1.5;" width="15" x="746" y="2701" /><rect fill="#DAA520" height="2" style="stroke:#000000;stroke-width:1.5;" width="4" x="744" y="2703" /><rect fill="#DAA520" height="2" style="stroke:#000000;stroke-width:1.5;" width="4" x="744" y="2707" /><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="35" x="636.5" y="2728.9951">&#171;lib&#187;</text><text fill="#FFFFFF" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" text-decoration="underline" textLength="174" x="567" y="2745.292">@types/socket.io-client</text></a><a href="https://www.npmjs.com/package/socket.io-client" target="_top" title="https://www.npmjs.com/package/socket.io-client" xlink:actuate="onRequest" xlink:href="https://www.npmjs.com/package/socket.io-client" xlink:show="new" xlink:title="https://www.npmjs.com/package/socket.io-client" xlink:type="simple"><rect fill="#DAA520" filter="url(#f1askvma54e97y)" height="62.5938" style="stroke:#000000;stroke-width:1.5;" width="154" x="582" y="2598" /><rect fill="#DAA520" height="10" style="stroke:#000000;stroke-width:1.5;" width="15" x="716" y="2603" /><rect fill="#DAA520" height="2" style="stroke:#000000;stroke-width:1.5;" width="4" x="714" y="2605" /><rect fill="#DAA520" height="2" style="stroke:#000000;stroke-width:1.5;" width="4" x="714" y="2609" /><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="35" x="636.5" y="2630.9951">&#171;lib&#187;</text><text fill="#FFFFFF" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" text-decoration="underline" textLength="114" x="597" y="2647.292">socket.io-client</text></a><a href="https://github.com/codeoverflow-org/nodecg-io/tree/master/nodecg-io-telegram" target="_top" title="https://github.com/codeoverflow-org/nodecg-io/tree/master/nodecg-io-telegram" xlink:actuate="onRequest" xlink:href="https://github.com/codeoverflow-org/nodecg-io/tree/master/nodecg-io-telegram" xlink:show="new" xlink:title="https://github.com/codeoverflow-org/nodecg-io/tree/master/nodecg-io-telegram" xlink:type="simple"><rect fill="#FF8C00" filter="url(#f1askvma54e97y)" height="62.5938" style="stroke:#000000;stroke-width:1.5;" width="184" x="39" y="2740" /><rect fill="#FF8C00" height="10" style="stroke:#000000;stroke-width:1.5;" width="15" x="203" y="2745" /><rect fill="#FF8C00" height="2" style="stroke:#000000;stroke-width:1.5;" width="4" x="201" y="2747" /><rect fill="#FF8C00" height="2" style="stroke:#000000;stroke-width:1.5;" width="4" x="201" y="2751" /><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="69" x="91.5" y="2772.9951">&#171;service&#187;</text><text fill="#FFFFFF" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" text-decoration="underline" textLength="144" x="54" y="2789.292">nodecg-io-telegram</text></a><a href="https://www.npmjs.com/package/@types/node-telegram-bot-api" target="_top" title="https://www.npmjs.com/package/@types/node-telegram-bot-api" xlink:actuate="onRequest" xlink:href="https://www.npmjs.com/package/@types/node-telegram-bot-api" xlink:show="new" xlink:title="https://www.npmjs.com/package/@types/node-telegram-bot-api" xlink:type="simple"><rect fill="#DAA520" filter="url(#f1askvma54e97y)" height="62.5938" style="stroke:#000000;stroke-width:1.5;" width="268" x="525" y="2892" /><rect fill="#DAA520" height="10" style="stroke:#000000;stroke-width:1.5;" width="15" x="773" y="2897" /><rect fill="#DAA520" height="2" style="stroke:#000000;stroke-width:1.5;" width="4" x="771" y="2899" /><rect fill="#DAA520" height="2" style="stroke:#000000;stroke-width:1.5;" width="4" x="771" y="2903" /><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="35" x="636.5" y="2924.9951">&#171;lib&#187;</text><text fill="#FFFFFF" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" text-decoration="underline" textLength="228" x="540" y="2941.292">@types/node-telegram-bot-api</text></a><a href="https://www.npmjs.com/package/node-telegram-bot-api" target="_top" title="https://www.npmjs.com/package/node-telegram-bot-api" xlink:actuate="onRequest" xlink:href="https://www.npmjs.com/package/node-telegram-bot-api" xlink:show="new" xlink:title="https://www.npmjs.com/package/node-telegram-bot-api" xlink:type="simple"><rect fill="#DAA520" filter="url(#f1askvma54e97y)" height="62.5938" style="stroke:#000000;stroke-width:1.5;" width="208" x="555" y="2794" /><rect fill="#DAA520" height="10" style="stroke:#000000;stroke-width:1.5;" width="15" x="743" y="2799" /><rect fill="#DAA520" height="2" style="stroke:#000000;stroke-width:1.5;" width="4" x="741" y="2801" /><rect fill="#DAA520" height="2" style="stroke:#000000;stroke-width:1.5;" width="4" x="741" y="2805" /><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="35" x="636.5" y="2826.9951">&#171;lib&#187;</text><text fill="#FFFFFF" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" text-decoration="underline" textLength="168" x="570" y="2843.292">node-telegram-bot-api</text></a><a href="https://github.com/codeoverflow-org/nodecg-io/tree/master/nodecg-io-tiane" target="_top" title="https://github.com/codeoverflow-org/nodecg-io/tree/master/nodecg-io-tiane" xlink:actuate="onRequest" xlink:href="https://github.com/codeoverflow-org/nodecg-io/tree/master/nodecg-io-tiane" xlink:show="new" xlink:title="https://github.com/codeoverflow-org/nodecg-io/tree/master/nodecg-io-tiane" xlink:type="simple"><rect fill="#FF8C00" filter="url(#f1askvma54e97y)" height="62.5938" style="stroke:#000000;stroke-width:1.5;" width="155" x="53.5" y="2846" /><rect fill="#FF8C00" height="10" style="stroke:#000000;stroke-width:1.5;" width="15" x="188.5" y="2851" /><rect fill="#FF8C00" height="2" style="stroke:#000000;stroke-width:1.5;" width="4" x="186.5" y="2853" /><rect fill="#FF8C00" height="2" style="stroke:#000000;stroke-width:1.5;" width="4" x="186.5" y="2857" /><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="69" x="91.5" y="2878.9951">&#171;service&#187;</text><text fill="#FFFFFF" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" text-decoration="underline" textLength="115" x="68.5" y="2895.292">nodecg-io-tiane</text></a><a href="https://www.npmjs.com/package/ws" target="_top" title="https://www.npmjs.com/package/ws" xlink:actuate="onRequest" xlink:href="https://www.npmjs.com/package/ws" xlink:show="new" xlink:title="https://www.npmjs.com/package/ws" xlink:type="simple"><rect fill="#DAA520" filter="url(#f1askvma54e97y)" height="62.5938" style="stroke:#000000;stroke-width:1.5;" width="75" x="621.5" y="2990" /><rect fill="#DAA520" height="10" style="stroke:#000000;stroke-width:1.5;" width="15" x="676.5" y="2995" /><rect fill="#DAA520" height="2" style="stroke:#000000;stroke-width:1.5;" width="4" x="674.5" y="2997" /><rect fill="#DAA520" height="2" style="stroke:#000000;stroke-width:1.5;" width="4" x="674.5" y="3001" /><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="35" x="636.5" y="3022.9951">&#171;lib&#187;</text><text fill="#FFFFFF" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" text-decoration="underline" textLength="18" x="645" y="3039.292">ws</text></a><a href="https://github.com/codeoverflow-org/nodecg-io/tree/master/nodecg-io-twitch-chat" target="_top" title="https://github.com/codeoverflow-org/nodecg-io/tree/master/nodecg-io-twitch-chat" xlink:actuate="onRequest" xlink:href="https://github.com/codeoverflow-org/nodecg-io/tree/master/nodecg-io-twitch-chat" xlink:show="new" xlink:title="https://github.com/codeoverflow-org/nodecg-io/tree/master/nodecg-io-twitch-chat" xlink:type="simple"><rect fill="#FF8C00" filter="url(#f1askvma54e97y)" height="62.5938" style="stroke:#000000;stroke-width:1.5;" width="202" x="30" y="3415" /><rect fill="#FF8C00" height="10" style="stroke:#000000;stroke-width:1.5;" width="15" x="212" y="3420" /><rect fill="#FF8C00" height="2" style="stroke:#000000;stroke-width:1.5;" width="4" x="210" y="3422" /><rect fill="#FF8C00" height="2" style="stroke:#000000;stroke-width:1.5;" width="4" x="210" y="3426" /><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="69" x="91.5" y="3447.9951">&#171;service&#187;</text><text fill="#FFFFFF" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" text-decoration="underline" textLength="162" x="45" y="3464.292">nodecg-io-twitch-chat</text></a><a href="https://www.npmjs.com/package/twitch" target="_top" title="https://www.npmjs.com/package/twitch" xlink:actuate="onRequest" xlink:href="https://www.npmjs.com/package/twitch" xlink:show="new" xlink:title="https://www.npmjs.com/package/twitch" xlink:type="simple"><rect fill="#DAA520" filter="url(#f1askvma54e97y)" height="62.5938" style="stroke:#000000;stroke-width:1.5;" width="86" x="616" y="3339" /><rect fill="#DAA520" height="10" style="stroke:#000000;stroke-width:1.5;" width="15" x="682" y="3344" /><rect fill="#DAA520" height="2" style="stroke:#000000;stroke-width:1.5;" width="4" x="680" y="3346" /><rect fill="#DAA520" height="2" style="stroke:#000000;stroke-width:1.5;" width="4" x="680" y="3350" /><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="35" x="636.5" y="3371.9951">&#171;lib&#187;</text><text fill="#FFFFFF" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" text-decoration="underline" textLength="46" x="631" y="3388.292">twitch</text></a><a href="https://www.npmjs.com/package/twitch-auth" target="_top" title="https://www.npmjs.com/package/twitch-auth" xlink:actuate="onRequest" xlink:href="https://www.npmjs.com/package/twitch-auth" xlink:show="new" xlink:title="https://www.npmjs.com/package/twitch-auth" xlink:type="simple"><rect fill="#DAA520" filter="url(#f1askvma54e97y)" height="62.5938" style="stroke:#000000;stroke-width:1.5;" width="124" x="597" y="3543" /><rect fill="#DAA520" height="10" style="stroke:#000000;stroke-width:1.5;" width="15" x="701" y="3548" /><rect fill="#DAA520" height="2" style="stroke:#000000;stroke-width:1.5;" width="4" x="699" y="3550" /><rect fill="#DAA520" height="2" style="stroke:#000000;stroke-width:1.5;" width="4" x="699" y="3554" /><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="35" x="636.5" y="3575.9951">&#171;lib&#187;</text><text fill="#FFFFFF" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" text-decoration="underline" textLength="84" x="612" y="3592.292">twitch-auth</text></a><a href="https://www.npmjs.com/package/twitch-chat-client" target="_top" title="https://www.npmjs.com/package/twitch-chat-client" xlink:actuate="onRequest" xlink:href="https://www.npmjs.com/package/twitch-chat-client" xlink:show="new" xlink:title="https://www.npmjs.com/package/twitch-chat-client" xlink:type="simple"><rect fill="#DAA520" filter="url(#f1askvma54e97y)" height="62.5938" style="stroke:#000000;stroke-width:1.5;" width="171" x="573.5" y="3445" /><rect fill="#DAA520" height="10" style="stroke:#000000;stroke-width:1.5;" width="15" x="724.5" y="3450" /><rect fill="#DAA520" height="2" style="stroke:#000000;stroke-width:1.5;" width="4" x="722.5" y="3452" /><rect fill="#DAA520" height="2" style="stroke:#000000;stroke-width:1.5;" width="4" x="722.5" y="3456" /><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="35" x="636.5" y="3477.9951">&#171;lib&#187;</text><text fill="#FFFFFF" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" text-decoration="underline" textLength="131" x="588.5" y="3494.292">twitch-chat-client</text></a><a href="https://github.com/codeoverflow-org/nodecg-io/tree/master/nodecg-io-twitch-pubsub" target="_top" title="https://github.com/codeoverflow-org/nodecg-io/tree/master/nodecg-io-twitch-pubsub" xlink:actuate="onRequest" xlink:href="https://github.com/codeoverflow-org/nodecg-io/tree/master/nodecg-io-twitch-pubsub" xlink:show="new" xlink:title="https://github.com/codeoverflow-org/nodecg-io/tree/master/nodecg-io-twitch-pubsub" xlink:type="simple"><rect fill="#FF8C00" filter="url(#f1askvma54e97y)" height="62.5938" style="stroke:#000000;stroke-width:1.5;" width="223" x="19.5" y="3237" /><rect fill="#FF8C00" height="10" style="stroke:#000000;stroke-width:1.5;" width="15" x="222.5" y="3242" /><rect fill="#FF8C00" height="2" style="stroke:#000000;stroke-width:1.5;" width="4" x="220.5" y="3244" /><rect fill="#FF8C00" height="2" style="stroke:#000000;stroke-width:1.5;" width="4" x="220.5" y="3248" /><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="69" x="91.5" y="3269.9951">&#171;service&#187;</text><text fill="#FFFFFF" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" text-decoration="underline" textLength="183" x="34.5" y="3286.292">nodecg-io-twitch-pubsub</text></a><a href="https://www.npmjs.com/package/twitch-pubsub-client" target="_top" title="https://www.npmjs.com/package/twitch-pubsub-client" xlink:actuate="onRequest" xlink:href="https://www.npmjs.com/package/twitch-pubsub-client" xlink:show="new" xlink:title="https://www.npmjs.com/package/twitch-pubsub-client" xlink:type="simple"><rect fill="#DAA520" filter="url(#f1askvma54e97y)" height="62.5938" style="stroke:#000000;stroke-width:1.5;" width="192" x="563" y="3237" /><rect fill="#DAA520" height="10" style="stroke:#000000;stroke-width:1.5;" width="15" x="735" y="3242" /><rect fill="#DAA520" height="2" style="stroke:#000000;stroke-width:1.5;" width="4" x="733" y="3244" /><rect fill="#DAA520" height="2" style="stroke:#000000;stroke-width:1.5;" width="4" x="733" y="3248" /><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="35" x="636.5" y="3269.9951">&#171;lib&#187;</text><text fill="#FFFFFF" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" text-decoration="underline" textLength="152" x="578" y="3286.292">twitch-pubsub-client</text></a><a href="https://github.com/codeoverflow-org/nodecg-io/tree/master/nodecg-io-twitter" target="_top" title="https://github.com/codeoverflow-org/nodecg-io/tree/master/nodecg-io-twitter" xlink:actuate="onRequest" xlink:href="https://github.com/codeoverflow-org/nodecg-io/tree/master/nodecg-io-twitter" xlink:show="new" xlink:title="https://github.com/codeoverflow-org/nodecg-io/tree/master/nodecg-io-twitter" xlink:type="simple"><rect fill="#FF8C00" filter="url(#f1askvma54e97y)" height="62.5938" style="stroke:#000000;stroke-width:1.5;" width="169" x="46.5" y="3641" /><rect fill="#FF8C00" height="10" style="stroke:#000000;stroke-width:1.5;" width="15" x="195.5" y="3646" /><rect fill="#FF8C00" height="2" style="stroke:#000000;stroke-width:1.5;" width="4" x="193.5" y="3648" /><rect fill="#FF8C00" height="2" style="stroke:#000000;stroke-width:1.5;" width="4" x="193.5" y="3652" /><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="69" x="91.5" y="3673.9951">&#171;service&#187;</text><text fill="#FFFFFF" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" text-decoration="underline" textLength="129" x="61.5" y="3690.292">nodecg-io-twitter</text></a><a href="https://www.npmjs.com/package/@types/twitter" target="_top" title="https://www.npmjs.com/package/@types/twitter" xlink:actuate="onRequest" xlink:href="https://www.npmjs.com/package/@types/twitter" xlink:show="new" xlink:title="https://www.npmjs.com/package/@types/twitter" xlink:type="simple"><rect fill="#DAA520" filter="url(#f1askvma54e97y)" height="62.5938" style="stroke:#000000;stroke-width:1.5;" width="151" x="583.5" y="3641" /><rect fill="#DAA520" height="10" style="stroke:#000000;stroke-width:1.5;" width="15" x="714.5" y="3646" /><rect fill="#DAA520" height="2" style="stroke:#000000;stroke-width:1.5;" width="4" x="712.5" y="3648" /><rect fill="#DAA520" height="2" style="stroke:#000000;stroke-width:1.5;" width="4" x="712.5" y="3652" /><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="35" x="636.5" y="3673.9951">&#171;lib&#187;</text><text fill="#FFFFFF" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" text-decoration="underline" textLength="111" x="598.5" y="3690.292">@types/twitter</text></a><a href="https://www.npmjs.com/package/twitter" target="_top" title="https://www.npmjs.com/package/twitter" xlink:actuate="onRequest" xlink:href="https://www.npmjs.com/package/twitter" xlink:show="new" xlink:title="https://www.npmjs.com/package/twitter" xlink:type="simple"><rect fill="#DAA520" filter="url(#f1askvma54e97y)" height="62.5938" style="stroke:#000000;stroke-width:1.5;" width="91" x="613.5" y="3739" /><rect fill="#DAA520" height="10" style="stroke:#000000;stroke-width:1.5;" width="15" x="684.5" y="3744" /><rect fill="#DAA520" height="2" style="stroke:#000000;stroke-width:1.5;" width="4" x="682.5" y="3746" /><rect fill="#DAA520" height="2" style="stroke:#000000;stroke-width:1.5;" width="4" x="682.5" y="3750" /><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="35" x="636.5" y="3771.9951">&#171;lib&#187;</text><text fill="#FFFFFF" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" text-decoration="underline" textLength="51" x="628.5" y="3788.292">twitter</text></a><a href="https://github.com/codeoverflow-org/nodecg-io/tree/master/nodecg-io-websocket-client" target="_top" title="https://github.com/codeoverflow-org/nodecg-io/tree/master/nodecg-io-websocket-client" xlink:actuate="onRequest" xlink:href="https://github.com/codeoverflow-org/nodecg-io/tree/master/nodecg-io-websocket-client" xlink:show="new" xlink:title="https://github.com/codeoverflow-org/nodecg-io/tree/master/nodecg-io-websocket-client" xlink:type="simple"><rect fill="#FF8C00" filter="url(#f1askvma54e97y)" height="62.5938" style="stroke:#000000;stroke-width:1.5;" width="244" x="9" y="3095" /><rect fill="#FF8C00" height="10" style="stroke:#000000;stroke-width:1.5;" width="15" x="233" y="3100" /><rect fill="#FF8C00" height="2" style="stroke:#000000;stroke-width:1.5;" width="4" x="231" y="3102" /><rect fill="#FF8C00" height="2" style="stroke:#000000;stroke-width:1.5;" width="4" x="231" y="3106" /><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="69" x="91.5" y="3127.9951">&#171;service&#187;</text><text fill="#FFFFFF" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" text-decoration="underline" textLength="204" x="24" y="3144.292">nodecg-io-websocket-client</text></a><a href="https://www.npmjs.com/package/@types/ws" target="_top" title="https://www.npmjs.com/package/@types/ws" xlink:actuate="onRequest" xlink:href="https://www.npmjs.com/package/@types/ws" xlink:show="new" xlink:title="https://www.npmjs.com/package/@types/ws" xlink:type="simple"><rect fill="#DAA520" filter="url(#f1askvma54e97y)" height="62.5938" style="stroke:#000000;stroke-width:1.5;" width="118" x="600" y="3113" /><rect fill="#DAA520" height="10" style="stroke:#000000;stroke-width:1.5;" width="15" x="698" y="3118" /><rect fill="#DAA520" height="2" style="stroke:#000000;stroke-width:1.5;" width="4" x="696" y="3120" /><rect fill="#DAA520" height="2" style="stroke:#000000;stroke-width:1.5;" width="4" x="696" y="3124" /><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="35" x="636.5" y="3145.9951">&#171;lib&#187;</text><text fill="#FFFFFF" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" text-decoration="underline" textLength="78" x="615" y="3162.292">@types/ws</text></a><a href="https://github.com/codeoverflow-org/nodecg-io/tree/master/nodecg-io-websocket-server" target="_top" title="https://github.com/codeoverflow-org/nodecg-io/tree/master/nodecg-io-websocket-server" xlink:actuate="onRequest" xlink:href="https://github.com/codeoverflow-org/nodecg-io/tree/master/nodecg-io-websocket-server" xlink:show="new" xlink:title="https://github.com/codeoverflow-org/nodecg-io/tree/master/nodecg-io-websocket-server" xlink:type="simple"><rect fill="#FF8C00" filter="url(#f1askvma54e97y)" height="62.5938" style="stroke:#000000;stroke-width:1.5;" width="248" x="7" y="2953" /><rect fill="#FF8C00" height="10" style="stroke:#000000;stroke-width:1.5;" width="15" x="235" y="2958" /><rect fill="#FF8C00" height="2" style="stroke:#000000;stroke-width:1.5;" width="4" x="233" y="2960" /><rect fill="#FF8C00" height="2" style="stroke:#000000;stroke-width:1.5;" width="4" x="233" y="2964" /><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="69" x="91.5" y="2985.9951">&#171;service&#187;</text><text fill="#FFFFFF" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" text-decoration="underline" textLength="208" x="22" y="3002.292">nodecg-io-websocket-server</text></a><a href="https://github.com/codeoverflow-org/nodecg-io/tree/master/nodecg-io-xdotool" target="_top" title="https://github.com/codeoverflow-org/nodecg-io/tree/master/nodecg-io-xdotool" xlink:actuate="onRequest" xlink:href="https://github.com/codeoverflow-org/nodecg-io/tree/master/nodecg-io-xdotool" xlink:show="new" xlink:title="https://github.com/codeoverflow-org/nodecg-io/tree/master/nodecg-io-xdotool" xlink:type="simple"><rect fill="#FF8C00" filter="url(#f1askvma54e97y)" height="62.5938" style="stroke:#000000;stroke-width:1.5;" width="173" x="44.5" y="73" /><rect fill="#FF8C00" height="10" style="stroke:#000000;stroke-width:1.5;" width="15" x="197.5" y="78" /><rect fill="#FF8C00" height="2" style="stroke:#000000;stroke-width:1.5;" width="4" x="195.5" y="80" /><rect fill="#FF8C00" height="2" style="stroke:#000000;stroke-width:1.5;" width="4" x="195.5" y="84" /><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="69" x="91.5" y="105.9951">&#171;service&#187;</text><text fill="#FFFFFF" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" text-decoration="underline" textLength="133" x="59.5" y="122.292">nodecg-io-xdotool</text></a><a href="https://www.npmjs.com/package/@rauschma/stringio" target="_top" title="https://www.npmjs.com/package/@rauschma/stringio" xlink:actuate="onRequest" xlink:href="https://www.npmjs.com/package/@rauschma/stringio" xlink:show="new" xlink:title="https://www.npmjs.com/package/@rauschma/stringio" xlink:type="simple"><rect fill="#DAA520" filter="url(#f1askvma54e97y)" height="62.5938" style="stroke:#000000;stroke-width:1.5;" width="182" x="568" y="7" /><rect fill="#DAA520" height="10" style="stroke:#000000;stroke-width:1.5;" width="15" x="730" y="12" /><rect fill="#DAA520" height="2" style="stroke:#000000;stroke-width:1.5;" width="4" x="728" y="14" /><rect fill="#DAA520" height="2" style="stroke:#000000;stroke-width:1.5;" width="4" x="728" y="18" /><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="35" x="636.5" y="39.9951">&#171;lib&#187;</text><text fill="#FFFFFF" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" text-decoration="underline" textLength="142" x="583" y="56.292">@rauschma/stringio</text></a><a href="https://github.com/codeoverflow-org/nodecg-io/tree/master/nodecg-io-youtube" target="_top" title="https://github.com/codeoverflow-org/nodecg-io/tree/master/nodecg-io-youtube" xlink:actuate="onRequest" xlink:href="https://github.com/codeoverflow-org/nodecg-io/tree/master/nodecg-io-youtube" xlink:show="new" xlink:title="https://github.com/codeoverflow-org/nodecg-io/tree/master/nodecg-io-youtube" xlink:type="simple"><rect fill="#FF8C00" filter="url(#f1askvma54e97y)" height="62.5938" style="stroke:#000000;stroke-width:1.5;" width="177" x="42.5" y="2260" /><rect fill="#FF8C00" height="10" style="stroke:#000000;stroke-width:1.5;" width="15" x="199.5" y="2265" /><rect fill="#FF8C00" height="2" style="stroke:#000000;stroke-width:1.5;" width="4" x="197.5" y="2267" /><rect fill="#FF8C00" height="2" style="stroke:#000000;stroke-width:1.5;" width="4" x="197.5" y="2271" /><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="69" x="91.5" y="2292.9951">&#171;service&#187;</text><text fill="#FFFFFF" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" text-decoration="underline" textLength="137" x="57.5" y="2309.292">nodecg-io-youtube</text></a><a href="https://www.npmjs.com/package/@types/gapi" target="_top" title="https://www.npmjs.com/package/@types/gapi" xlink:actuate="onRequest" xlink:href="https://www.npmjs.com/package/@types/gapi" xlink:show="new" xlink:title="https://www.npmjs.com/package/@types/gapi" xlink:type="simple"><rect fill="#DAA520" filter="url(#f1askvma54e97y)" height="62.5938" style="stroke:#000000;stroke-width:1.5;" width="131" x="593.5" y="2402" /><rect fill="#DAA520" height="10" style="stroke:#000000;stroke-width:1.5;" width="15" x="704.5" y="2407" /><rect fill="#DAA520" height="2" style="stroke:#000000;stroke-width:1.5;" width="4" x="702.5" y="2409" /><rect fill="#DAA520" height="2" style="stroke:#000000;stroke-width:1.5;" width="4" x="702.5" y="2413" /><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="35" x="636.5" y="2434.9951">&#171;lib&#187;</text><text fill="#FFFFFF" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" text-decoration="underline" textLength="91" x="608.5" y="2451.292">@types/gapi</text></a><a href="https://www.npmjs.com/package/googleapis" target="_top" title="https://www.npmjs.com/package/googleapis" xlink:actuate="onRequest" xlink:href="https://www.npmjs.com/package/googleapis" xlink:show="new" xlink:title="https://www.npmjs.com/package/googleapis" xlink:type="simple"><rect fill="#DAA520" filter="url(#f1askvma54e97y)" height="62.5938" style="stroke:#000000;stroke-width:1.5;" width="118" x="600" y="2304" /><rect fill="#DAA520" height="10" style="stroke:#000000;stroke-width:1.5;" width="15" x="698" y="2309" /><rect fill="#DAA520" height="2" style="stroke:#000000;stroke-width:1.5;" width="4" x="696" y="2311" /><rect fill="#DAA520" height="2" style="stroke:#000000;stroke-width:1.5;" width="4" x="696" y="2315" /><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="35" x="636.5" y="2336.9951">&#171;lib&#187;</text><text fill="#FFFFFF" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" text-decoration="underline" textLength="78" x="615" y="2353.292">googleapis</text></a><path d="M445.577,1362.85 C469.445,1349.84 498.09,1335.32 525,1324.5 C646.259,1275.75 796.729,1238.27 868.348,1221.74 " fill="none" id="nodecg_io_core-to-ajv" style="stroke:#DCDCDC;stroke-width:1.0;stroke-dasharray:7.0,7.0;" /><polygon fill="#DCDCDC" points="873.366,1220.59,863.6998,1218.7021,868.4924,1221.7072,865.4873,1226.4999,873.366,1220.59" style="stroke:#DCDCDC;stroke-width:1.0;" /><path d="M465.084,1382.51 C569.917,1365.54 759.256,1334.9 853.516,1319.64 " fill="none" id="nodecg_io_core-to-crypto_js" style="stroke:#DCDCDC;stroke-width:1.0;stroke-dasharray:7.0,7.0;" /><polygon fill="#DCDCDC" points="858.483,1318.84,848.9591,1316.331,853.5474,1319.6397,850.2386,1324.228,858.483,1318.84" style="stroke:#DCDCDC;stroke-width:1.0;" /><path d="M465.084,1396.5 C575.749,1399.48 780.587,1405.01 868.335,1407.38 " fill="none" id="nodecg_io_core-to-tslib" style="stroke:#DCDCDC;stroke-width:1.0;stroke-dasharray:7.0,7.0;" /><polygon fill="#DCDCDC" points="873.438,1407.51,864.5486,1403.2698,868.4398,1407.3758,864.3339,1411.2669,873.438,1407.51" style="stroke:#DCDCDC;stroke-width:1.0;" /><path d="M465.084,1410.49 C567.853,1432.66 751.835,1472.37 847.84,1493.09 " fill="none" id="nodecg_io_core-to-typescript" style="stroke:#DCDCDC;stroke-width:1.0;stroke-dasharray:7.0,7.0;" /><polygon fill="#DCDCDC" points="852.908,1494.18,844.9524,1488.3742,848.0202,1493.1269,843.2674,1496.1947,852.908,1494.18" style="stroke:#DCDCDC;stroke-width:1.0;" /><path d="M203.239,216.52 C222.838,223.79 242.201,234.81 255,251.5 C324.072,341.57 376.105,1172.4 386.923,1357.89 " fill="none" id="nodecg_io_ahk-to-nodecg_io_core" style="stroke:#DCDCDC;stroke-width:1.0;" /><polygon fill="#DCDCDC" points="387.216,1362.93,390.6951,1353.7161,386.9303,1357.9382,382.7082,1354.1733,387.216,1362.93" style="stroke:#DCDCDC;stroke-width:1.0;" /><path d="M203.212,199.52 C305.92,195.23 494.143,187.35 593.168,183.21 " fill="none" id="nodecg_io_ahk-to-node_fetch" style="stroke:#DCDCDC;stroke-width:1.0;stroke-dasharray:7.0,7.0;" /><polygon fill="#DCDCDC" points="598.396,182.99,589.2371,179.3686,593.4003,183.1984,589.5705,187.3616,598.396,182.99" style="stroke:#DCDCDC;stroke-width:1.0;" /><path d="M216.219,678.5 C323.605,678.5 506.501,678.5 599.688,678.5 " fill="none" id="nodecg_io_discord-to-discord_js" style="stroke:#DCDCDC;stroke-width:1.0;stroke-dasharray:7.0,7.0;" /><polygon fill="#DCDCDC" points="604.876,678.5,595.876,674.5,599.876,678.5,595.876,682.5,604.876,678.5" style="stroke:#DCDCDC;stroke-width:1.0;" /><path d="M216.122,698.94 C230.831,705.88 244.696,715.14 255,727.5 C336.688,825.48 375.926,1232.99 386.192,1357.92 " fill="none" id="nodecg_io_discord-to-nodecg_io_core" style="stroke:#DCDCDC;stroke-width:1.0;" /><polygon fill="#DCDCDC" points="386.602,1362.95,389.8692,1353.6589,386.202,1357.966,381.8949,1354.2988,386.602,1362.95" style="stroke:#DCDCDC;stroke-width:1.0;" /><path d="M212.72,318.49 C228.905,325.64 244.224,335.6 255,349.5 C380.646,511.52 388.993,1191.2 389.127,1357.61 " fill="none" id="nodecg_io_intellij-to-nodecg_io_core" style="stroke:#DCDCDC;stroke-width:1.0;" /><polygon fill="#DCDCDC" points="389.129,1362.85,393.129,1353.85,389.129,1357.85,385.129,1353.85,389.129,1362.85" style="stroke:#DCDCDC;stroke-width:1.0;" /><path d="M212.748,282.08 C317.287,258.23 497.407,217.14 593.386,195.24 " fill="none" id="nodecg_io_intellij-to-node_fetch" style="stroke:#DCDCDC;stroke-width:1.0;stroke-dasharray:7.0,7.0;" /><polygon fill="#DCDCDC" points="598.456,194.08,588.7912,192.1848,593.5816,195.1935,590.5729,199.9839,598.456,194.08" style="stroke:#DCDCDC;stroke-width:1.0;" /><path d="M199.153,384.2 C301.424,362.42 494.85,321.24 594.747,299.97 " fill="none" id="nodecg_io_irc-to-types_irc" style="stroke:#DCDCDC;stroke-width:1.0;stroke-dasharray:7.0,7.0;" /><polygon fill="#DCDCDC" points="599.725,298.91,590.0889,296.8742,594.8349,299.9524,591.7566,304.6984,599.725,298.91" style="stroke:#DCDCDC;stroke-width:1.0;" /><path d="M199.153,396.71 C309.376,393.78 525.478,388.03 616.264,385.61 " fill="none" id="nodecg_io_irc-to-irc" style="stroke:#DCDCDC;stroke-width:1.0;stroke-dasharray:7.0,7.0;" /><polygon fill="#DCDCDC" points="621.278,385.48,612.1749,381.7205,616.2798,385.6128,612.3874,389.7176,621.278,385.48" style="stroke:#DCDCDC;stroke-width:1.0;" /><path d="M171.889,430.21 C199.847,454.77 235.566,491.29 255,531.5 C327.703,681.93 374.539,1212.94 386.163,1357.78 " fill="none" id="nodecg_io_irc-to-nodecg_io_core" style="stroke:#DCDCDC;stroke-width:1.0;" /><polygon fill="#DCDCDC" points="386.561,1362.76,389.8282,1353.4689,386.161,1357.776,381.8539,1354.1088,386.561,1362.76" style="stroke:#DCDCDC;stroke-width:1.0;" /><path d="M227.574,803.36 C237.859,809.34 247.345,816.62 255,825.5 C325.369,907.12 371.206,1244.93 384.783,1357.68 " fill="none" id="nodecg_io_midi_input-to-nodecg_io_core" style="stroke:#DCDCDC;stroke-width:1.0;" /><polygon fill="#DCDCDC" points="385.406,1362.87,388.2972,1353.4551,384.806,1357.9061,380.355,1354.415,385.406,1362.87" style="stroke:#DCDCDC;stroke-width:1.0;" /><path d="M227.56,776.5 C337.041,776.5 512.792,776.5 602.063,776.5 " fill="none" id="nodecg_io_midi_input-to-easymidi" style="stroke:#DCDCDC;stroke-width:1.0;stroke-dasharray:7.0,7.0;" /><polygon fill="#DCDCDC" points="607.294,776.5,598.294,772.5,602.294,776.5,598.294,780.5,607.294,776.5" style="stroke:#DCDCDC;stroke-width:1.0;" /><path d="M233.191,906.18 C241.244,911.4 248.689,917.47 255,924.5 C369.579,1052.22 386.754,1271.43 388.913,1357.9 " fill="none" id="nodecg_io_midi_output-to-nodecg_io_core" style="stroke:#DCDCDC;stroke-width:1.0;" /><polygon fill="#DCDCDC" points="389.025,1362.91,392.8182,1353.8209,388.9107,1357.9113,384.8203,1354.0038,389.025,1362.91" style="stroke:#DCDCDC;stroke-width:1.0;" /><path d="M233.107,855.66 C342.975,835.19 514.535,803.23 602.256,786.89 " fill="none" id="nodecg_io_midi_output-to-easymidi" style="stroke:#DCDCDC;stroke-width:1.0;stroke-dasharray:7.0,7.0;" /><polygon fill="#DCDCDC" points="607.397,785.93,597.8166,783.6463,602.4816,786.8459,599.282,791.511,607.397,785.93" style="stroke:#DCDCDC;stroke-width:1.0;" /><path d="M203.233,991.56 C222.021,999.17 240.947,1009.79 255,1024.5 C346.948,1120.74 376.554,1284.79 385.453,1357.7 " fill="none" id="nodecg_io_obs-to-nodecg_io_core" style="stroke:#DCDCDC;stroke-width:1.0;" /><polygon fill="#DCDCDC" points="386.058,1362.79,388.9759,1353.3833,385.4721,1357.8244,381.031,1354.3207,386.058,1362.79" style="stroke:#DCDCDC;stroke-width:1.0;" /><path d="M203.212,960.1 C298.294,942.2 466.664,910.51 569.707,891.12 " fill="none" id="nodecg_io_obs-to-obs_websocket_js" style="stroke:#DCDCDC;stroke-width:1.0;stroke-dasharray:7.0,7.0;" /><polygon fill="#DCDCDC" points="574.869,890.15,565.2841,887.8852,569.9554,891.0756,566.765,895.7469,574.869,890.15" style="stroke:#DCDCDC;stroke-width:1.0;" /><path d="M227.255,562.75 C342.812,541.22 532.522,505.88 616.162,490.29 " fill="none" id="nodecg_io_philipshue-to-is_ip" style="stroke:#DCDCDC;stroke-width:1.0;stroke-dasharray:7.0,7.0;" /><polygon fill="#DCDCDC" points="621.275,489.34,611.6946,487.0563,616.3596,490.2559,613.16,494.921,621.275,489.34" style="stroke:#DCDCDC;stroke-width:1.0;" /><path d="M227.255,580.5 C330.403,580.5 492.634,580.5 585.772,580.5 " fill="none" id="nodecg_io_philipshue-to-node_hue_api" style="stroke:#DCDCDC;stroke-width:1.0;stroke-dasharray:7.0,7.0;" /><polygon fill="#DCDCDC" points="590.979,580.5,581.979,576.5,585.979,580.5,581.979,584.5,590.979,580.5" style="stroke:#DCDCDC;stroke-width:1.0;" /><path d="M227.173,606.41 C237.725,612.55 247.388,620.14 255,629.5 C347.997,743.9 379.894,1221.1 387.217,1357.78 " fill="none" id="nodecg_io_philipshue-to-nodecg_io_core" style="stroke:#DCDCDC;stroke-width:1.0;" /><polygon fill="#DCDCDC" points="387.487,1362.88,390.9926,1353.6761,387.2156,1357.8874,383.0043,1354.1104,387.487,1362.88" style="stroke:#DCDCDC;stroke-width:1.0;" /><path d="M206.017,1095.52 C223.54,1103.26 241.14,1113.41 255,1126.5 C324.373,1192.04 363.134,1301.28 379.531,1357.93 " fill="none" id="nodecg_io_rcon-to-nodecg_io_core" style="stroke:#DCDCDC;stroke-width:1.0;" /><polygon fill="#DCDCDC" points="380.954,1362.91,382.3047,1353.1542,379.5691,1358.1056,374.6177,1355.3701,380.954,1362.91" style="stroke:#DCDCDC;stroke-width:1.0;" /><path d="M206.247,1059.24 C309.881,1039.34 496.156,1003.58 593.994,984.79 " fill="none" id="nodecg_io_rcon-to-rcon_client" style="stroke:#DCDCDC;stroke-width:1.0;stroke-dasharray:7.0,7.0;" /><polygon fill="#DCDCDC" points="599.159,983.8,589.5665,981.5675,594.2486,984.7421,591.0739,989.4242,599.159,983.8" style="stroke:#DCDCDC;stroke-width:1.0;" /><path d="M212.1,1206.27 C227.06,1213.75 242.046,1222.51 255,1232.5 C301.386,1268.27 342.273,1322.85 366.327,1358.61 " fill="none" id="nodecg_io_reddit-to-nodecg_io_core" style="stroke:#DCDCDC;stroke-width:1.0;" /><polygon fill="#DCDCDC" points="369.177,1362.87,367.5129,1353.1627,366.4035,1358.7097,360.8565,1357.6003,369.177,1362.87" style="stroke:#DCDCDC;stroke-width:1.0;" /><path d="M212.174,1159.5 C319.821,1138.01 508.346,1100.37 601.964,1081.69 " fill="none" id="nodecg_io_reddit-to-reddit_ts" style="stroke:#DCDCDC;stroke-width:1.0;stroke-dasharray:7.0,7.0;" /><polygon fill="#DCDCDC" points="606.897,1080.7,597.2891,1078.5347,601.9933,1081.6765,598.8515,1086.3806,606.897,1080.7" style="stroke:#DCDCDC;stroke-width:1.0;" /><path d="M203.931,1313.13 C237.754,1328 278.11,1345.74 312.493,1360.86 " fill="none" id="nodecg_io_sacn_receiver-to-nodecg_io_core" style="stroke:#DCDCDC;stroke-width:1.0;" /><polygon fill="#DCDCDC" points="317.087,1362.88,310.462,1355.5924,312.511,1360.8651,307.2382,1362.914,317.087,1362.88" style="stroke:#DCDCDC;stroke-width:1.0;" /><path d="M238.761,1258.56 C354.973,1233.6 535.028,1194.92 616.018,1177.52 " fill="none" id="nodecg_io_sacn_receiver-to-sacn" style="stroke:#DCDCDC;stroke-width:1.0;stroke-dasharray:7.0,7.0;" /><polygon fill="#DCDCDC" points="621.207,1176.4,611.5687,1174.3746,616.318,1177.4476,613.2449,1182.197,621.207,1176.4" style="stroke:#DCDCDC;stroke-width:1.0;" /><path d="M233.573,1394.5 C258.854,1394.5 285.59,1394.5 309.627,1394.5 " fill="none" id="nodecg_io_sacn_sender-to-nodecg_io_core" style="stroke:#DCDCDC;stroke-width:1.0;" /><polygon fill="#DCDCDC" points="314.713,1394.5,305.713,1390.5,309.713,1394.5,305.713,1398.5,314.713,1394.5" style="stroke:#DCDCDC;stroke-width:1.0;" /><path d="M205.415,1362.96 C317.544,1314.78 527.799,1224.44 616.666,1186.26 " fill="none" id="nodecg_io_sacn_sender-to-sacn" style="stroke:#DCDCDC;stroke-width:1.0;stroke-dasharray:7.0,7.0;" /><polygon fill="#DCDCDC" points="621.318,1184.26,611.4698,1184.145,616.7255,1186.2372,614.6333,1191.4929,621.318,1184.26" style="stroke:#DCDCDC;stroke-width:1.0;" /><path d="M209.048,1593.32 C304.739,1584.41 467.67,1569.23 568.713,1559.82 " fill="none" id="nodecg_io_serial-to-types_serialport" style="stroke:#DCDCDC;stroke-width:1.0;stroke-dasharray:7.0,7.0;" /><polygon fill="#DCDCDC" points="573.777,1559.35,564.4449,1556.2015,568.7985,1559.8135,565.1866,1564.1671,573.777,1559.35" style="stroke:#DCDCDC;stroke-width:1.0;" /><path d="M209.048,1607.68 C294.496,1615.64 433.561,1628.59 534.298,1637.98 " fill="none" id="nodecg_io_serial-to-serialport_parser_readline" style="stroke:#DCDCDC;stroke-width:1.0;stroke-dasharray:7.0,7.0;" /><polygon fill="#DCDCDC" points="539.367,1638.45,530.7767,1633.6327,534.3885,1637.9864,530.0349,1641.5983,539.367,1638.45" style="stroke:#DCDCDC;stroke-width:1.0;" /><path d="M171.313,1568.99 C218.36,1531.28 296.883,1468.34 345.651,1429.25 " fill="none" id="nodecg_io_serial-to-nodecg_io_core" style="stroke:#DCDCDC;stroke-width:1.0;" /><polygon fill="#DCDCDC" points="349.692,1426.01,340.1682,1428.5194,345.7911,1429.1378,345.1727,1434.7608,349.692,1426.01" style="stroke:#DCDCDC;stroke-width:1.0;" /><path d="M209.048,1622.03 C314.876,1651.61 502.946,1704.17 598.59,1730.9 " fill="none" id="nodecg_io_serial-to-serialport" style="stroke:#DCDCDC;stroke-width:1.0;stroke-dasharray:7.0,7.0;" /><polygon fill="#DCDCDC" points="603.634,1732.31,596.0431,1726.0348,598.8186,1730.964,593.8894,1733.7395,603.634,1732.31" style="stroke:#DCDCDC;stroke-width:1.0;" /><path d="M208.204,1783.08 C306.481,1796.72 476.68,1820.34 577.159,1834.28 " fill="none" id="nodecg_io_slack-to-slack_web_api" style="stroke:#DCDCDC;stroke-width:1.0;stroke-dasharray:7.0,7.0;" /><polygon fill="#DCDCDC" points="582.188,1834.98,573.8245,1829.7789,577.2356,1834.2915,572.723,1837.7027,582.188,1834.98" style="stroke:#DCDCDC;stroke-width:1.0;" /><path d="M169.158,1740.85 C195.252,1717.38 229.845,1683.67 255,1649.5 C307.851,1577.71 352.069,1482.27 374.052,1430.91 " fill="none" id="nodecg_io_slack-to-nodecg_io_core" style="stroke:#DCDCDC;stroke-width:1.0;" /><polygon fill="#DCDCDC" points="376.11,1426.08,368.9058,1432.7956,374.1525,1430.6809,376.2672,1435.9276,376.11,1426.08" style="stroke:#DCDCDC;stroke-width:1.0;" /><path d="M215.637,2012.91 C298.861,2018.29 427.852,2026.62 525.11,2032.91 " fill="none" id="nodecg_io_spotify-to-types_spotify_web_api_node" style="stroke:#DCDCDC;stroke-width:1.0;stroke-dasharray:7.0,7.0;" /><polygon fill="#DCDCDC" points="530.3,2033.25,521.5773,2028.6768,525.3105,2032.9269,521.0603,2036.66,530.3,2033.25" style="stroke:#DCDCDC;stroke-width:1.0;" /><path d="M195.223,2039.01 C230.34,2056.33 274.91,2077.98 315,2096.5 C407.502,2139.24 430.484,2150.43 525,2188.5 C551.534,2199.19 581.396,2210.27 606.091,2219.19 " fill="none" id="nodecg_io_spotify-to-express" style="stroke:#DCDCDC;stroke-width:1.0;stroke-dasharray:7.0,7.0;" /><polygon fill="#DCDCDC" points="610.959,2220.95,603.8441,2214.1399,606.2541,2219.2577,601.1363,2221.6677,610.959,2220.95" style="stroke:#DCDCDC;stroke-width:1.0;" /><path d="M156.924,1975.89 C184.127,1940.14 227.468,1879.35 255,1821.5 C320.373,1684.13 364.134,1507.1 381.1,1431.44 " fill="none" id="nodecg_io_spotify-to-nodecg_io_core" style="stroke:#DCDCDC;stroke-width:1.0;" /><polygon fill="#DCDCDC" points="382.275,1426.17,376.4159,1434.0865,381.1891,1431.0507,384.225,1435.8239,382.275,1426.17" style="stroke:#DCDCDC;stroke-width:1.0;" /><path d="M215.637,2028.49 C329.319,2057.02 528.395,2106.98 615.341,2128.79 " fill="none" id="nodecg_io_spotify-to-open" style="stroke:#DCDCDC;stroke-width:1.0;stroke-dasharray:7.0,7.0;" /><polygon fill="#DCDCDC" points="620.402,2130.06,612.6442,2123.9923,615.552,2128.8446,610.6996,2131.7524,620.402,2130.06" style="stroke:#DCDCDC;stroke-width:1.0;" /><path d="M215.637,1997.32 C307.852,1986.1 456.256,1968.05 555.421,1955.98 " fill="none" id="nodecg_io_spotify-to-spotify_web_api_node" style="stroke:#DCDCDC;stroke-width:1.0;stroke-dasharray:7.0,7.0;" /><polygon fill="#DCDCDC" points="560.401,1955.38,550.9841,1952.4952,555.4375,1955.9833,551.9494,1960.4367,560.401,1955.38" style="stroke:#DCDCDC;stroke-width:1.0;" /><path d="M233.107,2474.15 C327.855,2486.94 468.482,2505.92 561.654,2518.5 " fill="none" id="nodecg_io_streamdeck-to-elgato_stream_deck" style="stroke:#DCDCDC;stroke-width:1.0;stroke-dasharray:7.0,7.0;" /><polygon fill="#DCDCDC" points="566.887,2519.2,558.5039,2514.0306,561.9321,2518.5303,557.4323,2521.9585,566.887,2519.2" style="stroke:#DCDCDC;stroke-width:1.0;" /><path d="M177.167,2428.77 C204.315,2407.13 236.99,2376.02 255,2340.5 C338.21,2176.38 377.839,1586.17 386.927,1431.71 " fill="none" id="nodecg_io_streamdeck-to-nodecg_io_core" style="stroke:#DCDCDC;stroke-width:1.0;" /><polygon fill="#DCDCDC" points="387.237,1426.4,382.7292,1435.1567,386.9513,1431.3918,390.7161,1435.6139,387.237,1426.4" style="stroke:#DCDCDC;stroke-width:1.0;" /><path d="M249.717,2651.43 C338.497,2667.97 459.464,2690.51 546.653,2706.75 " fill="none" id="nodecg_io_streamelements-to-types_socket_io_client" style="stroke:#DCDCDC;stroke-width:1.0;stroke-dasharray:7.0,7.0;" /><polygon fill="#DCDCDC" points="551.823,2707.72,543.708,2702.139,546.9076,2706.8041,542.2426,2710.0037,551.823,2707.72" style="stroke:#DCDCDC;stroke-width:1.0;" /><path d="M177.425,2597.9 C204.674,2576.31 237.366,2545.21 255,2509.5 C352.081,2312.9 382.011,1601.07 387.847,1431.12 " fill="none" id="nodecg_io_streamelements-to-nodecg_io_core" style="stroke:#DCDCDC;stroke-width:1.0;" /><polygon fill="#DCDCDC" points="388.021,1426.01,383.7148,1434.8676,387.8496,1431.0071,391.7101,1435.1418,388.021,1426.01" style="stroke:#DCDCDC;stroke-width:1.0;" /><path d="M249.717,2629.5 C349.187,2629.5 489.06,2629.5 576.561,2629.5 " fill="none" id="nodecg_io_streamelements-to-socket_io_client" style="stroke:#DCDCDC;stroke-width:1.0;stroke-dasharray:7.0,7.0;" /><polygon fill="#DCDCDC" points="581.728,2629.5,572.728,2625.5,576.728,2629.5,572.728,2633.5,581.728,2629.5" style="stroke:#DCDCDC;stroke-width:1.0;" /><path d="M223.022,2797.8 C311.938,2823.497 447.555,2862.687 543.693,2890.468 " fill="none" id="nodecg_io_telegram-to-types_node_telegram_bot_api" style="stroke:#DCDCDC;stroke-width:1.0;stroke-dasharray:7.0,7.0;" /><polygon fill="#DCDCDC" points="548.528,2891.865,540.993,2885.5227,543.7247,2890.4763,538.7711,2893.208,548.528,2891.865" style="stroke:#DCDCDC;stroke-width:1.0;" /><path d="M223.022,2780.84 C313.727,2790.16 453.033,2804.458 549.448,2814.356 " fill="none" id="nodecg_io_telegram-to-node_telegram_bot_api" style="stroke:#DCDCDC;stroke-width:1.0;stroke-dasharray:7.0,7.0;" /><polygon fill="#DCDCDC" points="554.582,2814.883,546.0383,2809.9835,549.6082,2814.3716,545.2201,2817.9415,554.582,2814.883" style="stroke:#DCDCDC;stroke-width:1.0;" /><path d="M192.909,2739.86 C216.234,2724.55 240.661,2703.91 255,2678.5 C380.14,2456.71 388.7,1616.91 389.044,1431.06 " fill="none" id="nodecg_io_telegram-to-nodecg_io_core" style="stroke:#DCDCDC;stroke-width:1.0;" /><polygon fill="#DCDCDC" points="389.052,1426.01,385.0263,1434.9985,389.0377,1431.01,393.0263,1435.0214,389.052,1426.01" style="stroke:#DCDCDC;stroke-width:1.0;" /><path d="M208.509,2856.747 C226.424,2848.331 243.589,2836.645 255,2820.5 C337.596,2703.64 379.999,1643.91 387.708,1431.48 " fill="none" id="nodecg_io_tiane-to-nodecg_io_core" style="stroke:#DCDCDC;stroke-width:1.0;" /><polygon fill="#DCDCDC" points="387.894,1426.32,383.5624,1435.1652,387.7083,1431.3165,391.5569,1435.4624,387.894,1426.32" style="stroke:#DCDCDC;stroke-width:1.0;" /><path d="M208.766,2898.516 C321.547,2929.391 528.167,2985.956 616.34,3010.095 " fill="none" id="nodecg_io_tiane-to-ws" style="stroke:#DCDCDC;stroke-width:1.0;stroke-dasharray:7.0,7.0;" /><polygon fill="#DCDCDC" points="621.212,3011.429,613.5877,3005.1944,616.3895,3010.1087,611.4752,3012.9105,621.212,3011.429" style="stroke:#DCDCDC;stroke-width:1.0;" /><path d="M174.71,3414.953 C202.865,3391.501 237.635,3356.852 255,3317.5 C333.964,3138.558 380.454,1682.83 387.931,1431.42 " fill="none" id="nodecg_io_twitch_chat-to-nodecg_io_core" style="stroke:#DCDCDC;stroke-width:1.0;" /><polygon fill="#DCDCDC" points="388.09,1426.05,383.8344,1434.932,387.9471,1431.048,391.8312,1435.1606,388.09,1426.05" style="stroke:#DCDCDC;stroke-width:1.0;" /><path d="M232.175,3432.026 C345.715,3415.621 526.004,3389.572 610.881,3377.308 " fill="none" id="nodecg_io_twitch_chat-to-twitch" style="stroke:#DCDCDC;stroke-width:1.0;stroke-dasharray:7.0,7.0;" /><polygon fill="#DCDCDC" points="615.838,3376.592,606.3581,3373.9215,610.8895,3377.3077,607.5032,3381.8391,615.838,3376.592" style="stroke:#DCDCDC;stroke-width:1.0;" /><path d="M232.175,3470.877 C337.783,3496.576 501.14,3536.329 591.751,3558.379 " fill="none" id="nodecg_io_twitch_chat-to-twitch_auth" style="stroke:#DCDCDC;stroke-width:1.0;stroke-dasharray:7.0,7.0;" /><polygon fill="#DCDCDC" points="596.811,3559.61,589.0126,3553.5946,591.9529,3558.4273,587.1202,3561.3675,596.811,3559.61" style="stroke:#DCDCDC;stroke-width:1.0;" /><path d="M232.175,3452.213 C329.153,3457.744 474.828,3466.053 568.151,3471.376 " fill="none" id="nodecg_io_twitch_chat-to-twitch_chat_client" style="stroke:#DCDCDC;stroke-width:1.0;stroke-dasharray:7.0,7.0;" /><polygon fill="#DCDCDC" points="573.387,3471.674,564.6289,3467.1689,568.3951,3471.3898,564.1742,3475.1559,573.387,3471.674" style="stroke:#DCDCDC;stroke-width:1.0;" /><path d="M193.595,3236.853 C216.88,3221.592 241.093,3201.001 255,3175.5 C341.44,3016.991 381.51,1672.73 388.036,1431.49 " fill="none" id="nodecg_io_twitch_pubsub-to-nodecg_io_core" style="stroke:#DCDCDC;stroke-width:1.0;" /><polygon fill="#DCDCDC" points="388.175,1426.34,383.9448,1435.2341,388.0464,1431.3383,391.9422,1435.4399,388.175,1426.34" style="stroke:#DCDCDC;stroke-width:1.0;" /><path d="M242.587,3289.945 C356.255,3311.987 527.921,3345.276 610.425,3361.274 " fill="none" id="nodecg_io_twitch_pubsub-to-twitch" style="stroke:#DCDCDC;stroke-width:1.0;stroke-dasharray:7.0,7.0;" /><polygon fill="#DCDCDC" points="615.729,3362.303,607.6546,3356.6635,610.8204,3361.3516,606.1323,3364.5173,615.729,3362.303" style="stroke:#DCDCDC;stroke-width:1.0;" /><path d="M242.587,3268.5 C335.746,3268.5 467.861,3268.5 557.922,3268.5 " fill="none" id="nodecg_io_twitch_pubsub-to-twitch_pubsub_client" style="stroke:#DCDCDC;stroke-width:1.0;stroke-dasharray:7.0,7.0;" /><polygon fill="#DCDCDC" points="562.984,3268.5,553.984,3264.5,557.984,3268.5,553.984,3272.5,562.984,3268.5" style="stroke:#DCDCDC;stroke-width:1.0;" /><path d="M215.637,3672.5 C315.164,3672.5 480.145,3672.5 578.031,3672.5 " fill="none" id="nodecg_io_twitter-to-types_twitter" style="stroke:#DCDCDC;stroke-width:1.0;stroke-dasharray:7.0,7.0;" /><polygon fill="#DCDCDC" points="583.22,3672.5,574.22,3668.5,578.22,3672.5,574.22,3676.5,583.22,3672.5" style="stroke:#DCDCDC;stroke-width:1.0;" /><path d="M162.049,3640.968 C191.629,3607.729 235.164,3552.388 255,3495.5 C395.435,3092.74 391.18,1677.94 389.335,1431.31 " fill="none" id="nodecg_io_twitter-to-nodecg_io_core" style="stroke:#DCDCDC;stroke-width:1.0;" /><polygon fill="#DCDCDC" points="389.294,1426.04,385.3713,1435.074,389.3369,1431.0398,393.371,1435.0054,389.294,1426.04" style="stroke:#DCDCDC;stroke-width:1.0;" /><path d="M215.637,3688.083 C326.302,3708.7008 517.892,3744.3962 608.188,3761.2194 " fill="none" id="nodecg_io_twitter-to-twitter" style="stroke:#DCDCDC;stroke-width:1.0;stroke-dasharray:7.0,7.0;" /><polygon fill="#DCDCDC" points="613.199,3762.1531,605.0838,3756.5725,608.2836,3761.2374,603.6187,3764.4372,613.199,3762.1531" style="stroke:#DCDCDC;stroke-width:1.0;" /><path d="M253.313,3146.184 C273.849,3148.813 294.994,3151.086 315,3152.5 C412.43,3159.387 525.774,3154.169 594.671,3149.527 " fill="none" id="nodecg_io_websocket_client-to-types_ws" style="stroke:#DCDCDC;stroke-width:1.0;stroke-dasharray:7.0,7.0;" /><polygon fill="#DCDCDC" points="599.964,3149.166,590.7119,3145.7899,594.9757,3149.5074,591.2581,3153.7712,599.964,3149.166" style="stroke:#DCDCDC;stroke-width:1.0;" /><path d="M193.513,3094.808 C216.785,3079.54 241.011,3058.956 255,3033.5 C334.723,2888.428 379.976,1661 387.783,1431.41 " fill="none" id="nodecg_io_websocket_client-to-nodecg_io_core" style="stroke:#DCDCDC;stroke-width:1.0;" /><polygon fill="#DCDCDC" points="387.96,1426.18,383.6791,1435.0498,387.8028,1431.1775,391.6751,1435.3013,387.96,1426.18" style="stroke:#DCDCDC;stroke-width:1.0;" /><path d="M253.005,3102.345 C369.365,3079.117 538.686,3045.317 616.305,3029.823 " fill="none" id="nodecg_io_websocket_client-to-ws" style="stroke:#DCDCDC;stroke-width:1.0;stroke-dasharray:7.0,7.0;" /><polygon fill="#DCDCDC" points="621.284,3028.829,611.6752,3026.668,616.3807,3029.8077,613.241,3034.5132,621.284,3028.829" style="stroke:#DCDCDC;stroke-width:1.0;" /><path d="M235.607,3016.015 C342.529,3048.539 505.884,3098.229 594.865,3125.296 " fill="none" id="nodecg_io_websocket_server-to-types_ws" style="stroke:#DCDCDC;stroke-width:1.0;stroke-dasharray:7.0,7.0;" /><polygon fill="#DCDCDC" points="599.831,3126.806,592.3839,3120.3608,595.0473,3125.3514,590.0566,3128.0148,599.831,3126.806" style="stroke:#DCDCDC;stroke-width:1.0;" /><path d="M226.975,2952.886 C237.843,2945.746 247.643,2937.056 255,2926.5 C343.233,2799.91 381.385,1652.62 387.954,1431.34 " fill="none" id="nodecg_io_websocket_server-to-nodecg_io_core" style="stroke:#DCDCDC;stroke-width:1.0;" /><polygon fill="#DCDCDC" points="388.103,1426.29,383.8221,1435.1598,387.9458,1431.2875,391.8181,1435.4113,388.103,1426.29" style="stroke:#DCDCDC;stroke-width:1.0;" /><path d="M255.324,2993.175 C371.417,3001.341 538.663,3013.106 615.934,3018.541 " fill="none" id="nodecg_io_websocket_server-to-ws" style="stroke:#DCDCDC;stroke-width:1.0;stroke-dasharray:7.0,7.0;" /><polygon fill="#DCDCDC" points="621.34,3018.921,612.6434,3014.2983,616.3524,3018.5695,612.0811,3022.2785,621.34,3018.921" style="stroke:#DCDCDC;stroke-width:1.0;" /><path d="M217.653,124.52 C232.048,131.49 245.406,140.87 255,153.5 C329.872,252.07 377.834,1163.17 387.282,1357.96 " fill="none" id="nodecg_io_xdotool-to-nodecg_io_core" style="stroke:#DCDCDC;stroke-width:1.0;" /><polygon fill="#DCDCDC" points="387.525,1362.97,391.0832,1353.7863,387.2822,1357.9759,383.0926,1354.1749,387.525,1362.97" style="stroke:#DCDCDC;stroke-width:1.0;" /><path d="M217.682,116.88 C322.784,132.07 498.605,157.47 593.148,171.13 " fill="none" id="nodecg_io_xdotool-to-node_fetch" style="stroke:#DCDCDC;stroke-width:1.0;stroke-dasharray:7.0,7.0;" /><polygon fill="#DCDCDC" points="598.144,171.85,589.808,166.605,593.1953,171.1355,588.6648,174.5229,598.144,171.85" style="stroke:#DCDCDC;stroke-width:1.0;" /><path d="M217.682,93.75 C312.345,81.87 464.378,62.79 562.722,50.46 " fill="none" id="nodecg_io_xdotool-to-rauschma_stringio" style="stroke:#DCDCDC;stroke-width:1.0;stroke-dasharray:7.0,7.0;" /><polygon fill="#DCDCDC" points="567.949,49.8,558.5205,46.9532,562.988,50.4233,559.5179,54.8908,567.949,49.8" style="stroke:#DCDCDC;stroke-width:1.0;" /><path d="M219.744,2315.19 C323.265,2343.13 493.268,2389.03 588.245,2414.67 " fill="none" id="nodecg_io_youtube-to-types_gapi" style="stroke:#DCDCDC;stroke-width:1.0;stroke-dasharray:7.0,7.0;" /><polygon fill="#DCDCDC" points="593.271,2416.03,585.6255,2409.8214,588.444,2414.7261,583.5393,2417.5447,593.271,2416.03" style="stroke:#DCDCDC;stroke-width:1.0;" /><path d="M219.744,2282.49 C330.047,2271.17 515.828,2252.1 605.907,2242.85 " fill="none" id="nodecg_io_youtube-to-express" style="stroke:#DCDCDC;stroke-width:1.0;stroke-dasharray:7.0,7.0;" /><polygon fill="#DCDCDC" points="610.912,2242.33,601.5508,2239.2693,605.9381,2242.8402,602.3672,2247.2275,610.912,2242.33" style="stroke:#DCDCDC;stroke-width:1.0;" /><path d="M219.773,2305.58 C249.894,2309.98 283.859,2314.48 315,2317.5 C412.323,2326.95 525.698,2331.68 594.629,2333.86 " fill="none" id="nodecg_io_youtube-to-googleapis" style="stroke:#DCDCDC;stroke-width:1.0;stroke-dasharray:7.0,7.0;" /><polygon fill="#DCDCDC" points="599.925,2334.02,591.0539,2329.7418,594.9274,2333.8644,590.8049,2337.7379,599.925,2334.02" style="stroke:#DCDCDC;stroke-width:1.0;" /><path d="M152.356,2259.75 C179.652,2215.78 227.822,2133.1 255,2056.5 C336.651,1826.38 374.13,1532.62 385.273,1431.01 " fill="none" id="nodecg_io_youtube-to-nodecg_io_core" style="stroke:#DCDCDC;stroke-width:1.0;" /><polygon fill="#DCDCDC" points="385.815,1426.02,380.8856,1434.5465,385.2862,1430.992,388.8408,1435.3926,385.815,1426.02" style="stroke:#DCDCDC;stroke-width:1.0;" /><path d="M219.744,2266.14 C334.092,2233.1 529.558,2176.62 615.424,2151.8 " fill="none" id="nodecg_io_youtube-to-open" style="stroke:#DCDCDC;stroke-width:1.0;stroke-dasharray:7.0,7.0;" /><polygon fill="#DCDCDC" points="620.423,2150.36,610.6659,2149.0186,615.6199,2151.7495,612.8891,2156.7035,620.423,2150.36" style="stroke:#DCDCDC;stroke-width:1.0;" /></g></svg></p>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid" aria-label="Footer">
+        
+          <a href="../samples/youtube/" title="YouTube sample" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+            </div>
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                YouTube sample
+              </div>
+            </div>
+          </a>
+        
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+          <div class="md-footer-copyright__highlight">
+            © 2020 codeoverflow.org CC-BY-4.0
+          </div>
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+      </div>
+      
+  <div class="md-footer-social">
+    
+      
+      
+        
+        
+      
+      <a href="https://discord.gg/sX2Gjbs" target="_blank" rel="noopener" title="discord.gg" class="md-footer-social__link">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M297.216 243.2c0 15.616-11.52 28.416-26.112 28.416-14.336 0-26.112-12.8-26.112-28.416s11.52-28.416 26.112-28.416c14.592 0 26.112 12.8 26.112 28.416zm-119.552-28.416c-14.592 0-26.112 12.8-26.112 28.416s11.776 28.416 26.112 28.416c14.592 0 26.112-12.8 26.112-28.416.256-15.616-11.52-28.416-26.112-28.416zM448 52.736V512c-64.494-56.994-43.868-38.128-118.784-107.776l13.568 47.36H52.48C23.552 451.584 0 428.032 0 398.848V52.736C0 23.552 23.552 0 52.48 0h343.04C424.448 0 448 23.552 448 52.736zm-72.96 242.688c0-82.432-36.864-149.248-36.864-149.248-36.864-27.648-71.936-26.88-71.936-26.88l-3.584 4.096c43.52 13.312 63.744 32.512 63.744 32.512-60.811-33.329-132.244-33.335-191.232-7.424-9.472 4.352-15.104 7.424-15.104 7.424s21.248-20.224 67.328-33.536l-2.56-3.072s-35.072-.768-71.936 26.88c0 0-36.864 66.816-36.864 149.248 0 0 21.504 37.12 78.08 38.912 0 0 9.472-11.52 17.152-21.248-32.512-9.728-44.8-30.208-44.8-30.208 3.766 2.636 9.976 6.053 10.496 6.4 43.21 24.198 104.588 32.126 159.744 8.96 8.96-3.328 18.944-8.192 29.44-15.104 0 0-12.8 20.992-46.336 30.464 7.68 9.728 16.896 20.736 16.896 20.736 56.576-1.792 78.336-38.912 78.336-38.912z"/></svg>
+      </a>
+    
+  </div>
+
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../assets/javascripts/vendor.d710d30a.min.js"></script>
+      <script src="../assets/javascripts/bundle.b39636ac.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents"}</script>
+      
+      <script>
+        app = initialize({
+          base: "..",
+          features: ["tabs"],
+          search: Object.assign({
+            worker: "../assets/javascripts/worker/search.a68abb33.min.js"
+          }, typeof search !== "undefined" && search)
+        })
+      </script>
+      
+    
+  </body>
+</html>
